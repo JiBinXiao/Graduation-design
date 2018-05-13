@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.trs.rwsc.modules.book.dao.JD_BookDao" >
+  <resultMap id="BaseResultMap" type="com.trs.rwsc.modules.book.entity.JD_Book" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.trs.rwsc.modules.book.entity.JD_Book" extends="BaseResultMap" >
+    <result column="title" property="title" jdbcType="LONGVARCHAR" />
+    <result column="prNow" property="prnow" jdbcType="LONGVARCHAR" />
+    <result column="pb" property="pb" jdbcType="LONGVARCHAR" />
+    <result column="isbn" property="isbn" jdbcType="LONGVARCHAR" />
+    <result column="link" property="link" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Blob_Column_List" >
+    title, prNow, pb, isbn, link
+  </sql>
+  <insert id="insert" parameterType="com.trs.rwsc.modules.book.entity.JD_Book" >
+    insert into db_python_jd (id, title, prNow, 
+      pb, isbn, link
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=LONGVARCHAR}, #{prnow,jdbcType=LONGVARCHAR}, 
+      #{pb,jdbcType=LONGVARCHAR}, #{isbn,jdbcType=LONGVARCHAR}, #{link,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.trs.rwsc.modules.book.entity.JD_Book" >
+    insert into db_python_jd
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="prnow != null" >
+        prNow,
+      </if>
+      <if test="pb != null" >
+        pb,
+      </if>
+      <if test="isbn != null" >
+        isbn,
+      </if>
+      <if test="link != null" >
+        link,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="prnow != null" >
+        #{prnow,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pb != null" >
+        #{pb,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="isbn != null" >
+        #{isbn,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="link != null" >
+        #{link,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!-- 查询全部企业 -->
+	<select id="findList" resultType="JD_Book">
+		SELECT
+			<include refid="Blob_Column_List"/>
+		FROM db_python_jd 
+	</select>
+	
+	<!-- 查询全部企业数目 -->
+	<select id="findAllCount" resultType="long">
+		SELECT
+			COUNT(1)
+		FROM db_python_jd
+	</select>
+</mapper>

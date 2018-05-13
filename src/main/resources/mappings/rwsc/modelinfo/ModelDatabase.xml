@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trs.rwsc.modules.modelinfo.dao.ModelDatabaseDao">
+	
+	<!--查询字段 -->
+    <sql id="databaseColumns">
+    	a.id,
+    	a.schema,
+		a.name,
+		a.url,
+		a.username,
+		a.password
+    </sql>
+	<!--模型查询条件 -->
+	<sql id="databaseConditions">
+		<if test="name!=null and name!=''">
+			and  a.name=#{name}
+		</if>
+	</sql>
+
+	<!-- 根据id获取-->
+	<select id="get" resultType="ModelDatabase">
+		SELECT
+			<include refid="databaseColumns"/>
+		FROM model_database a
+		WHERE a.id = #{id}
+	</select>
+	<!--查询模型列表信息 -->
+	<select id="findList" resultType="ModelDatabase">
+		SELECT
+		<include refid="databaseColumns"/>
+		FROM model_database a
+		<where>
+			<include refid="databaseConditions"/>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				order by a.id DESC
+			</otherwise>
+		</choose>
+	</select>
+</mapper>

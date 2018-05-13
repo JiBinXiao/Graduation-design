@@ -1,0 +1,43 @@
+﻿@charset "utf-8";
+/*
+  提示：CSS 样式只允许修改颜色属性，或图片的地址（图片大小要和默认的一致）。border:dotted solid double dashed
+*/
+*:focus {outline: none;}
+/* fade */
+.jbox-fade{background-color:#000000;opacity:0.5 !important;}
+/* drag */
+.jbox-drag{border:1px dashed #376EA5;}
+/* jbox */
+div.jbox {padding:0px;border:none;font-size:12px;}
+/* border */
+div.jbox .jbox-border{background: none repeat scroll 0 0 #000000;filter:alpha(opacity=20);-moz-opacity:0.2;opacity:0.2;}
+/* container */
+div.jbox .jbox-container{background-color:#ffffff;border:1px solid rgba(0, 0, 0, 0.2);border-radius:6px;box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);}
+/* title-panel */
+div.jbox .jbox-title-panel{border-bottom:1px solid #e5e5e5;height:56px !important;padding:15px;padding: 15px;background: #f1f1f1;}
+div.jbox .jbox-title{color:#000;font-size:18px;}
+div.jbox .jbox-title-icon{background:url(images/jbox-title-icon.gif) no-repeat scroll 3px 5px transparent;}
+div.jbox .jbox-close,div.jbox .jbox-close-hover{background:url(images/jbox-close1.gif) no-repeat scroll 0px 0px transparent;top:20px !important;right:15px !important;}
+div.jbox .jbox-close-hover{background-position:-16px 0;}
+/* content */
+div.jbox .jbox-content{min-height:24px;line-height:18px;color:#444444;font-size:14px;}
+div.jbox .jbox-content-loading{background-color:#E6E6E6;}
+div.jbox .jbox-content-loading-image{background:url(images/jbox-content-loading.gif) no-repeat bottom center;}
+/* button-panel */
+div.jbox .jbox-button-panel{border-top:1px solid #ddd;height:65px !important;padding:15px !important;}
+div.jbox .jbox-bottom-text{text-indent:10px;color:#444444;}
+div.jbox .jbox-button{color: #ffffff;background-color: #3380cc;border: 1px solid #507aa4;border-radius:6px;margin:1px 7px 0px 0px;height:35px;cursor:pointer;font-size:14px;padding:6px 12px !important;}
+div.jbox .jbox-button-hover{}
+div.jbox .jbox-button-active{background-position:0px -40px;}
+div.jbox-warning .jbox .jbox-button-panel{background-color: #FFFFFF;}
+/* tip-color */
+div.jbox .jbox-tip-color{background-color:#376EA5;border-color:#376EA5;border-radius:3px 3px 3px 3px;color:#ffffff;}
+/* icons */
+div.jbox span.jbox-icon{background:url(images/jbox-icons.png) no-repeat scroll 0 0 transparent;top:66px !important;_background:url(images/jbox-icons-ie6.gif) no-repeat scroll 0 0 transparent;}
+div.jbox span.jbox-icon-info {background-position:0 0;}
+div.jbox span.jbox-icon-question {background-position:-36px 0;}
+div.jbox span.jbox-icon-success {background-position:-72px 0;}
+div.jbox span.jbox-icon-warning {background-position:-108px 0;}
+div.jbox span.jbox-icon-error {background-position:-144px 0;}
+div.jbox span.jbox-icon-none {display: none; overflow:hidden;}
+div.jbox span.jbox-icon-loading {background:url(images/jbox-loading1.gif) no-repeat scroll 0 0 transparent;}

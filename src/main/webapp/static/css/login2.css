@@ -1,0 +1,102 @@
+html {
+  font-family: "Microsoft Yahei";
+  height:100%;
+  width:100%;
+}
+body {
+	font-family:"Microsoft Yahei";
+	font-size:14px;
+	margin:0;
+	/*background: url(../img/2zrdI1g.jpg) no-repeat;*/
+	background: url(../img/login_mei1.jpg) no-repeat;
+	height:100%;
+  width:100%;
+  overflow: hidden;
+  background-size:cover;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://127.0.0.1:8020/coalDemo/img/2zrdI1g.jpg',sizingMethod='scale')',sizingMethod='scale');;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://127.0.0.1:8020/coalDemo/img/login_mei1.jpg',sizingMethod='scale')',sizingMethod='scale');
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{font-family: "microsoft yahei";}
+.headerDiv{
+	margin-top: 40px;
+	padding: 20px 0;
+}
+.headerDiv .title{
+	font-weight: 800;
+	font-size: 24px;
+}
+.headerDiv img{
+	margin-right: 10px;
+	float: left;
+	margin-top: 8px;
+}
+
+.main_body{
+	margin-top: 10%;
+	background: rgba(255, 255, 255, 0.6);
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr=#99ffffff,endColorstr=#99ffffff);
+}
+.title_div{
+	text-align: left;
+  margin: 0 auto;
+  background: #FFFFFE;
+  width: 320px;
+  padding: 40px 20px;
+  float: right;
+  margin-top: 40px;
+  padding-bottom: 30px;
+}
+.title_div .title{
+	color: #7c7d7d;
+	font-size: 22px;
+	text-align: center;
+}
+.title_div .title p{text-align: center;}
+.title_div .title small{
+	font-family: 华文新魏;
+	text-align: center;
+}
+.jiantou{margin-bottom: 0;}
+.jiantou>img{width: 20px;}
+.bigDIv{padding: 0;}
+.login-box{
+	position: relative;
+	width: 350px;
+	background: #7c7d7d;
+	padding: 40px;
+	color: #fff;
+}
+.login_form{
+	width: 300px;
+	margin-top: 50px;
+	background: #fff;
+	padding: 30px;
+	margin-right: 0;
+	z-index: 100;
+}
+.form_header{
+	text-align: center;
+	padding: 10px 0;
+	color:#ffffff;;
+}
+.form_header img{
+	width: 60px;
+	height: 60px;
+}
+.footer{
+	margin-top: 40px;
+}
+.footer p{
+	text-align: center;
+	color: #EEEEEE;
+}
+.input-group-addon{background: transparent;}
+.glyphicon{color: #fff;}
+.form-control{ background-color: rgba(255, 255, 255, 0.87);}
+.yzm{
+	font-size:16px;
+	font-weight:100;
+	background-image: url(../img/alpha-horizontal.jpg);
+	background-position:-20px 0;
+}

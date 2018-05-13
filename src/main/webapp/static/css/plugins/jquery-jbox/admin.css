@@ -1,0 +1,41 @@
+div.jbox .jbox-title,div.jbox .jbox-title i{
+	color: #0e2e46;
+}
+.window-form{
+ 	height:100%;
+  padding:15px 15px 0px 15px;
+  background-color: #f7f9fa;
+  overflow: auto;
+}
+.window-form>.row{
+	padding-bottom: 75px;
+}
+.window-form>.row{padding-bottom:75px;}
+.window-form>.row>form>div{padding-left: 0;padding-right: 0;}
+.window-form .form-horizontal .form-group{margin-right: -5px; margin-left: -5px;    border-bottom: 1px dashed #e7eaec;}
+.window-form .footer-btn{
+  position:absolute;
+  bottom:0;
+  left:0;
+  padding:15px;
+  width:100%;
+    background: #fff;
+  border: 0;
+  border-top: 1px solid #ccc;
+  z-index: 1500;
+ }
+div.jbox .jbox-container .jbox-title-panel{
+	border-bottom: 1px solid #e5e5e5;
+    height: 51px !important;
+    padding: 15px;
+    background: #f1f1f1;
+}
+.window-form .footer-btn{
+	background: #fff;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+form .form-group:last-child{
+	    padding-bottom: 0;
+}
+.singeRow .oneRow{padding-right: 4%;}

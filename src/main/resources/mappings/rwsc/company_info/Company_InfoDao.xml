@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trs.rwsc.modules.company.dao.Company_InfoDao">
+  <resultMap id="Company_InfoColumns" type="com.trs.rwsc.modules.company.dao.Company_InfoDao" >
+    <id column="CUST_ID" property="custId" jdbcType="BIGINT" />
+    <result column="CUST_CFNAME" property="custCfname" jdbcType="VARCHAR" />
+    <result column="CUST_CSNAME" property="custCsname" jdbcType="VARCHAR" />
+    <result column="CUST_EFNAME" property="custEfname" jdbcType="VARCHAR" />
+    <result column="CUST_ESNAME" property="custEsname" jdbcType="VARCHAR" />
+    <result column="CUST_ORGID" property="custOrgid" jdbcType="VARCHAR" />
+    <result column="CUST_INDUSTRYCODE" property="custIndustrycode" jdbcType="VARCHAR" />
+    <result column="CUST_INDUSTRY1" property="custIndustry1" jdbcType="VARCHAR" />
+    <result column="CUST_INDUSTRY2" property="custIndustry2" jdbcType="VARCHAR" />
+    <result column="AREA_CODE" property="areaCode" jdbcType="VARCHAR" />
+    <result column="DISTRICT_NAME" property="districtName" jdbcType="VARCHAR" />
+    <result column="PROVINCE_NAME" property="provinceName" jdbcType="VARCHAR" />
+    <result column="CITY_NAME" property="cityName" jdbcType="VARCHAR" />
+    <result column="PINYIN" property="pinyin" jdbcType="CHAR" />
+    <result column="ST" property="delflag" jdbcType="INTEGER" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="DATE" />
+    <result column="CHANGE_TIME" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="DATA_SOURCE" property="dataSource" jdbcType="INTEGER" />
+    <result column="IC_CODE" property="icCode" jdbcType="VARCHAR" />
+    <result column="STOCK_CODE" property="stockCode" jdbcType="VARCHAR" />
+    <result column="CMTP" property="cmtp" jdbcType="INTEGER" />
+    <result column="CUSER" property="createBy" jdbcType="VARCHAR" />
+    <result column="UUSER" property="updateBy" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Company_InfoColumns" >
+    CUST_ID, CUST_CFNAME, CUST_CSNAME, CUST_EFNAME, CUST_ESNAME, CUST_ORGID, CUST_INDUSTRYCODE, 
+    CUST_INDUSTRY1, CUST_INDUSTRY2, AREA_CODE, DISTRICT_NAME, PROVINCE_NAME, CITY_NAME, 
+    PINYIN, ST, CREATE_DATE, CHANGE_TIME, DATA_SOURCE, IC_CODE, STOCK_CODE, CMTP, CUSER, 
+    UUSER, REMARK
+  </sql>
+    
+    <insert id="insert" parameterType="com.trs.rwsc.modules.company.dao.Company_InfoDao" >
+    insert into company_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+      <if test="custCfname != null" >
+        CUST_CFNAME,
+      </if>
+      <if test="custCsname != null" >
+        CUST_CSNAME,
+      </if>
+      <if test="custEfname != null" >
+        CUST_EFNAME,
+      </if>
+      <if test="custEsname != null" >
+        CUST_ESNAME,
+      </if>
+      <if test="custOrgid != null" >
+        CUST_ORGID,
+      </if>
+      <if test="custIndustrycode != null" >
+        CUST_INDUSTRYCODE,
+      </if>
+      <if test="custIndustry1 != null" >
+        CUST_INDUSTRY1,
+      </if>
+      <if test="custIndustry2 != null" >
+        CUST_INDUSTRY2,
+      </if>
+      <if test="areaCode != null" >
+        AREA_CODE,
+      </if>
+      <if test="districtName != null" >
+        DISTRICT_NAME,
+      </if>
+      <if test="provinceName != null" >
+        PROVINCE_NAME,
+      </if>
+      <if test="cityName != null" >
+        CITY_NAME,
+      </if>
+      <if test="pinyin != null" >
+        PINYIN,
+      </if>
+      <if test="delflag != null" >
+        ST,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null" >
+        CHANGE_TIME,
+      </if>
+      <if test="dataSource != null" >
+        DATA_SOURCE,
+      </if>
+      <if test="icCode != null" >
+        IC_CODE,
+      </if>
+      <if test="stockCode != null" >
+        STOCK_CODE,
+      </if>
+      <if test="cmtp != null" >
+        CMTP,
+      </if>
+      <if test="createBy!=null and createBy.username != null and createBy.username!='' " >
+        CUSER,
+      </if>
+      <if test="updateBy!=null and  updateBy.username != null and updateBy.username!='' " >
+        UUSER,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="custId != null" >
+        #{custId,jdbcType=BIGINT},
+      </if>
+      <if test="custCfname != null" >
+        #{custCfname,jdbcType=VARCHAR},
+      </if>
+      <if test="custCsname != null" >
+        #{custCsname,jdbcType=VARCHAR},
+      </if>
+      <if test="custEfname != null" >
+        #{custEfname,jdbcType=VARCHAR},
+      </if>
+      <if test="custEsname != null" >
+        #{custEsname,jdbcType=VARCHAR},
+      </if>
+      <if test="custOrgid != null" >
+        #{custOrgid,jdbcType=VARCHAR},
+      </if>
+      <if test="custIndustrycode != null" >
+        #{custIndustrycode,jdbcType=VARCHAR},
+      </if>
+      <if test="custIndustry1 != null" >
+        #{custIndustry1,jdbcType=VARCHAR},
+      </if>
+      <if test="custIndustry2 != null" >
+        #{custIndustry2,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="districtName != null" >
+        #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceName != null" >
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="pinyin != null" >
+        #{pinyin,jdbcType=CHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataSource != null" >
+        #{dataSource,jdbcType=INTEGER},
+      </if>
+      <if test="icCode != null" >
+        #{icCode,jdbcType=VARCHAR},
+      </if>
+      <if test="stockCode != null" >
+        #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cmtp != null" >
+        #{cmtp,jdbcType=INTEGER},
+      </if>
+      <if test="createBy!=null and createBy.username != null and createBy.username!=''" >
+        #{createBy.username,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy!=null and updateBy.username != null and updateBy.username!=''" >
+        #{updateBy.username,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+	<update id="update" parameterType="com.trs.rwsc.modules.company.dao.Company_InfoDao" >
+    update company_info
+    <set >
+      <if test="custCfname != null and custCfname !=''" >
+        CUST_CFNAME = #{custCfname,jdbcType=VARCHAR},
+      </if>
+      <if test="custCsname != null and custCsname !=''" >
+        CUST_CSNAME = #{custCsname,jdbcType=VARCHAR},
+      </if>
+      <if test="custEfname != null and custEfname !=''" >
+        CUST_EFNAME = #{custEfname,jdbcType=VARCHAR},
+      </if>
+      <if test="custEsname != null and custEsname !=''" >
+        CUST_ESNAME = #{custEsname,jdbcType=VARCHAR},
+      </if>
+      <if test="custOrgid != null and custOrgid !=''" >
+        CUST_ORGID = #{custOrgid,jdbcType=VARCHAR},
+      </if>
+      <if test="custIndustrycode != null and custIndustrycode !=''" >
+        CUST_INDUSTRYCODE = #{custIndustrycode,jdbcType=VARCHAR},
+      </if>
+      <if test="custIndustry1 != null and custIndustry1 !=''" >
+        CUST_INDUSTRY1 = #{custIndustry1,jdbcType=VARCHAR},
+      </if>
+      <if test="custIndustry2 != null and custIndustry2 !=''" >
+        CUST_INDUSTRY2 = #{custIndustry2,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null and areaCode !=''" >
+        AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="districtName != null and districtName !=''" >
+        DISTRICT_NAME = #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceName != null and provinceName !=''" >
+        PROVINCE_NAME = #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null and cityName !=''" >
+        CITY_NAME = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="pinyin != null and pinyin !=''" >
+        PINYIN = #{pinyin,jdbcType=CHAR},
+      </if>
+      <if test="delflag != null" >
+        ST = #{delflag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateDate != null" >
+        CHANGE_TIME = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataSource != null" >
+        DATA_SOURCE = #{dataSource,jdbcType=INTEGER},
+      </if>
+      <if test="icCode != null and icCode !=''" >
+        IC_CODE = #{icCode,jdbcType=VARCHAR},
+      </if>
+      <if test="stockCode != null and stockCode !=''" >
+        STOCK_CODE = #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cmtp != null" >
+        CMTP = #{cmtp,jdbcType=INTEGER},
+      </if>
+      <if test="createBy !=null and createBy.username != null and createBy.username !=''" >
+        CUSER = #{createBy.username,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy !=null and updateBy.username != null and updateBy.username !=''" >
+        UUSER = #{updateBy.username,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and remark !=''" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CUST_ID = #{custId,jdbcType=BIGINT}
+  </update>
+  
+
+  
+  <!-- 逻辑删除 更新字段 delflag -1-->
+	<update id="delete" parameterType="Company_Info" >
+	update company_info 
+		<set>
+		    ST = #{delflag,jdbcType=INTEGER},
+		</set>
+		where CUST_ID  = #{custId}; 
+	</update>
+	
+	<!-- 物理删除 -->
+	<delete id="deleteData" parameterType="Company_Info" >
+		delete from company_info where CUST_ID=#{custId}; 
+	</delete>
+
+	<!-- 根据编号获得企业 -->
+	<select id="get" resultType="Company_Info">
+		SELECT
+			<include refid="Company_InfoColumns"/>
+		FROM company_info a
+		WHERE a.CUST_ID = #{custId}
+	</select>
+	
+	<!-- 根据全称查询企业 -->
+	<select id="getByCfname" resultType="Company_Info" parameterType="Company_Info">
+		SELECT
+			<include refid="Company_InfoColumns"/>
+		FROM company_info a
+		WHERE a.CUST_CFNAME like  "%"#{custCfname}"%"
+	</select>
+	
+	<!--查询正常的企业 -->
+	<select id="findList" resultType="Company_Info">
+		SELECT
+		<include refid="Company_InfoColumns"/>
+		FROM company_info a where a.ST=1
+	</select>
+	
+	<!--查询在回收站的企业 -->
+	<select id="findListbyDel" resultType="Company_Info">
+		SELECT
+		<include refid="Company_InfoColumns"/>
+		FROM company_info a where a.ST=-1
+	</select>
+	<!-- 查询全称是否可用 -->
+	<select id="checkNameisUse" resultType="Integer" parameterType="Company_Info">
+		SELECT count(1) FROM company_info a where a.CUST_CFNAME = #{custCfname}
+	</select>
+
+	<!-- 查询全部企业 -->
+	<select id="findAllList" resultType="Company_Info">
+		SELECT
+			<include refid="Company_InfoColumns"/>
+		FROM company_info a
+	</select>
+	
+	<!-- 查询全部企业数目 -->
+	<select id="findAllCount" resultType="long">
+		SELECT
+			COUNT(1)
+		FROM company_info a
+	</select>
+</mapper>

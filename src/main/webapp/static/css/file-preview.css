@@ -1,0 +1,17 @@
+/*图片上传*/
+.file-preview-frame{ position: relative; width: 20%; float: left; padding: 0 1%; margin: 5px 0; }
+.file-preview-frame input{ height: 100%; position: absolute; -webkit-opacity: -11; -moz-opacity: -11; opacity: -11; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0.01)"; filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=-11); }
+.file-preview-frame .kv-file-content{ height: 70px; text-align: center; }
+.file-preview-frame .kv-file-content img.imgShow{ height: 100%; width: 100%; }
+.imgPreview .file-preview-frame:first-child .kv-file-content img.imgShow{ height: 95px; }
+.file-preview-frame .kv-file-content input{ position: absolute; }
+.file-preview-frame .file-action{ margin-top: 5px; overflow: hidden; position: relative; top: -27px; width: 100%; }
+.file-preview-frame .file-action .btn{background: #fff;}
+.file-preview-frame .file-action .btn:first-child{border-radius: 7px 0 0 0;font-size: 12px;}
+.imgPreview .file-preview-frame .file-action .btn:first-child{display:inline-block;display: none \9;}
+.file-preview-frame .file-action .btn:last-child{border-radius: 0 7px 0 0;font-size: 12px;}
+.file-preview-frame .file-name{height: 25px; overflow: auto;border: 2px dashed #ddd;border-top: 0; position: relative; top: -27px;}
+.file-preview-frame .file-name p{text-align: center;height: auto;width: 100%; word-wrap: break-word; word-break:break-all; margin-bottom: 0;}
+.imgPreview .file-preview-frame:first-child .file-action,.imgPreview .file-preview-frame:first-child .file-name{display: none;}
+.imgPreview .file-preview-frame:first-child input{cursor: pointer;width:90%;height: 95px;outline: hidden;}
+		

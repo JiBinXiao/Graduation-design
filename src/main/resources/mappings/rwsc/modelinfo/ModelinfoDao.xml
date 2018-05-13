@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trs.rwsc.modules.modelinfo.dao.ModelinfoDao">
+	
+	<!--模型查询字段 -->
+    <sql id="modelinfoColumns">
+    	a.id,
+    	a.baseid,
+    	a.sourcetype,
+		a.modeltype,
+		a.modelname,
+		a.modeldesc,
+		a.sourcename,
+		a.sourcedesc,
+		a.sourcefields,
+		a.modelparam1,
+		a.modelparam2,
+		a.modelparam3,
+		a.modelparam4,
+		a.modelparam5,
+		a.modelparam6,
+		a.modelparam7,
+		a.status,
+		a.username,
+		a.lastuser,
+		a.lasttime,
+		a.result,
+		a.delflag
+    </sql>
+	<!--模型查询条件 -->
+	<sql id="modelinfoConditions">
+		<if test="modeltype!=null and modeltype!=''">
+			and a.modeltype=#{modeltype}
+		</if>
+		<if test="modelname!=null and modelname!=''">
+			and a.modelname like  CONCAT('%', #{modelname}, '%')
+		</if>
+
+		<if test="status!=null and status!=''">
+			and  a.status in (${status})
+		</if>
+        and a.delflag = #{DEL_FLAG_NORMAL}
+	</sql>
+
+	<!-- 根据id获取模型信息 -->
+	<select id="get" resultType="Modelinfo">
+		SELECT
+			<include refid="modelinfoColumns"/>
+		FROM model_baseinfo a
+		WHERE a.id = #{id}
+	</select>
+	<!--查询模型列表信息 -->
+	<select id="findList" resultType="Modelinfo">
+		SELECT
+		<include refid="modelinfoColumns"/>
+		FROM model_baseinfo a
+		<where>
+			<include refid="modelinfoConditions"/>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				order by a.id DESC
+			</otherwise>
+		</choose>
+	</select>
+	<!--新增模型信息 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO model_baseinfo(
+			baseid,
+			sourcetype,
+			modeltype,
+			modelname,
+			modeldesc,
+			sourcename,
+			sourcedesc,
+			sourcefields,
+			modelparam1,
+			modelparam2,
+			modelparam3,
+			modelparam4,
+			modelparam5,
+			modelparam6,
+			modelparam7,
+			status,
+			username,
+			lastuser,
+			lasttime,
+			result,
+			delflag
+		) VALUES (
+			#{baseid},
+			#{sourcetype},
+			#{modeltype},
+			#{modelname},
+			#{modeldesc},
+			#{sourcename},
+			#{sourcedesc},
+			#{sourcefields},
+			#{modelparam1},
+			#{modelparam2},
+			#{modelparam3},
+			#{modelparam4},
+			#{modelparam5},
+			#{modelparam6},
+			#{modelparam7},
+			#{status},
+			#{username},
+			#{lastuser},
+			#{lasttime},
+			#{result},
+			#{DEL_FLAG_NORMAL}
+		)
+	</insert>
+	<!--更新模型信息 -->
+	<update id="update">
+		UPDATE model_baseinfo SET
+			baseid = #{baseid},
+			sourcetype = #{sourcetype},
+			modeltype = #{modeltype},
+			modelname = #{modelname},
+			modeldesc = #{modeldesc},
+			sourcename = #{sourcename},
+			sourcedesc = #{sourcedesc},
+			sourcefields = #{sourcefields},
+			modelparam1 = #{modelparam1},
+			modelparam2 = #{modelparam2},
+			modelparam3 = #{modelparam3},
+			modelparam4 = #{modelparam4},
+			modelparam5 = #{modelparam5},
+			modelparam6 = #{modelparam6},
+			modelparam7 = #{modelparam7},
+			status = #{status},
+			username = #{username},
+			lastuser = #{lastuser},
+			lasttime = #{lasttime},
+			result = #{result}
+		WHERE id = #{id}
+	</update>
+
+	<!--更新模型状态信息 -->
+	<update id="updateStatus">
+		UPDATE model_baseinfo SET
+			status = #{status}
+		WHERE id = #{id}
+	</update>
+
+	<update id="delete">
+		UPDATE model_baseinfo SET
+		delflag = #{DEL_FLAG_DELETE} where id = #{id}
+	</update>
+</mapper>

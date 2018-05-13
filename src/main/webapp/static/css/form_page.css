@@ -1,0 +1,128 @@
+.tab-content>.tab-pane {
+	padding: 30px 20px 10px 0;
+}
+
+.ibox .ibox-title {
+	min-height: 55px;
+}
+
+.ibox .ibox-title>h5 {
+	margin-top: 5px;
+}
+
+.ibox-tools a {
+	color: #fff;
+}
+
+.nav.nav-pills.steps {
+	position: absolute;
+	top: -22px;
+}
+
+.nav.steps>li.active {
+	background: transparent;
+}
+
+.steps.nav-pills li>a {
+	background: transparent;
+	line-height: 50px;
+	text-align: left;
+	width: 90%;
+	text-align: center;
+}
+
+.nav-pills>li.active>a:focus,
+.nav-pills>li.active>a:hover {
+	background: transparent;
+}
+
+.steps li.done a {}
+
+.steps li a .step-number {
+	display: block;
+	font-size: 22px;
+	width: 45px;
+	color: #fff;
+	font-weight: bold;
+	margin: auto;
+	text-align: center;
+	height: 45px;
+	line-height: 45px;
+}
+
+.steps li a .step-number img {
+	width: 45px;
+	height: 45px;
+}
+
+.steps li a .step-name {
+	font-size: 16px;
+	padding-left: 15px;
+	color: #555;
+	text-align: center;
+}
+
+.tab-content {
+	clear: both;
+	margin-top: 70px;
+}
+
+.wizard-form {
+	position: relative;
+}
+
+.table-bordered>thead>tr>td,
+.table-bordered>thead>tr>th {
+	background-color: #ccc;
+	color: #333;
+}
+
+.fileld-diy {
+	padding-bottom: 20px;
+}
+
+.fileld-diy legend {
+	font-size: 18px;
+}
+
+.fileld-diy .sel_span {
+	border: 1px solid #ddd;
+	cursor: pointer;
+	padding: 5px;
+	margin-right: 5px;
+}
+
+.fileld-diy .sel_span:hover {
+	background: #f8ac59;
+	color: #fff;
+}
+
+.fileld-diy .sel_span b {
+	color: #fda210
+}
+
+.fileld-diy .sel_span:hover b {
+	color: #fff;
+}
+
+.table-head {
+	padding-right: 17px;
+	background-color: #ccc;
+}
+
+.scrollTable .table {
+	margin-bottom: 0;
+}
+
+
+/*能带滚动条的表身*/
+
+
+/*div的第二个子元素*/
+
+#scrollTable .table_div {
+	width: 100%;
+	max-height: 150px;
+	overflow-y: scroll;
+	/*必需*/
+}

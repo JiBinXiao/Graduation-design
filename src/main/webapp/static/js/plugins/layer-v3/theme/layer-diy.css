@@ -1,0 +1,6 @@
+.layer-form>.row>form>div{padding-left: 0; padding-right: 0;}
+.layer-form>.row{margin-bottom: 65px;}
+.layer-form .form-horizontal .form-group{    margin-right: -5px; margin-left: -5px; }
+.layer-form{height: 100%; padding: 15px 15px 0px 15px;overflow: auto;}
+.layer-form .footer-btn{position: absolute; bottom: 0; left: 0; padding: 15px; width: 100%; background: #fff; border: 0; border-top: 1px solid #ccc; z-index: 1500;}
+		

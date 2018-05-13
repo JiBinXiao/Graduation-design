@@ -1,0 +1,104 @@
+html {
+  font-family: "Microsoft Yahei";
+}
+body {
+	font-family:"Microsoft Yahei";
+	font-size:14px;
+	margin:0;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{font-family: "microsoft yahei";}
+.headerDiv{
+	margin-top: 40px;
+	padding: 20px 0;
+}
+.headerDiv .title{
+	font-weight: 800;
+	font-size: 24px;
+}
+.headerDiv img{
+	margin-right: 10px;
+	float: left;
+	margin-top: 8px;
+}
+.main_body{
+	/*background: #1da02b;*/
+	padding: 50px 0;
+		background: url(../img/b5.jpg) no-repeat;
+	height:100%;
+  width:100%;
+  overflow: hidden;
+  background-size:cover;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://127.0.0.1:8020/coalDemo/img/b1.jpg',sizingMethod='scale')',sizingMethod='scale');;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://127.0.0.1:8020/coalDemo/img/b1.jpg',sizingMethod='scale')',sizingMethod='scale');
+
+}
+.imgDIV{
+	text-align: right;
+  margin: 0 auto;
+	width: 300px;
+	margin-top: 10px;
+	background: url(../img/mainbody.png) no-repeat center;
+	height:100%;
+  width:100%;
+  min-height: 350px;
+  overflow: hidden;
+  /*background-size:cover;*/
+	/*filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://127.0.0.1:8020/coalDemo/img/mainbody.png',sizingMethod='scale')',sizingMethod='scale');;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://127.0.0.1:8020/coalDemo/img/mainbody.png',sizingMethod='scale')',sizingMethod='scale');*/
+
+}
+.imgDIV img{
+	max-width: 300px;
+}
+.login-box{
+	position: relative;
+	width: 350px;
+	margin: 0 auto;
+	background: #FFFFFE;
+	padding: 30px;
+	border-top: 5px solid #13253d;
+  box-shadow: 0 0 30px  #1c3959;
+}
+.login_form{
+	width: 300px;
+	margin-top: 50px;
+	background: #fff;
+	padding: 30px;
+	margin-right: 0;
+	z-index: 100;
+}
+.divBg{
+	position: absolute;
+	top: -9px;
+	height: 25px;
+	width: 375px;
+	border-radius: 15px;
+	background: #3072be;
+	left: 108px;
+  z-index: 10;
+  /*behavior: url("http://127.0.0.1:8020/coalDemo/css/ie-css3.htc");*/
+}
+.form_header{
+	text-align: center;
+	padding: 10px 0;
+	padding-top: 0;
+}
+.form_header img{
+	width: 90px;
+	height: 90px;
+}
+.footer{
+	padding: 20px 0;
+}
+.footer p{
+	text-align: center;
+}
+.input-group-addon{color: #999999;background: inherit; border-right: 1px solid #ccc;padding-right: 5px;}
+.form-control{    padding: 6px 0px;padding-left:5px;border-left: 0;}
+.yzm{
+	font-size:16px;
+	font-weight:100;
+	background-image: url(../img/alpha-horizontal.jpg);
+	background-position:-20px 0;
+}

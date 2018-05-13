@@ -1,0 +1,77 @@
+html,body {
+  font-family: "Microsoft Yahei";
+}
+body {
+	font-family:"Microsoft Yahei";
+	font-size:14px;
+	margin:0;
+	background: url(../img/login_bg11.jpg) repeat;
+	height:100%;
+  width:100%;
+  overflow: auto;
+  background-size: cover;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{font-family: "microsoft yahei";}
+.headerDiv{
+	margin-top: 40px;
+	padding: 20px 0;
+}
+.headerDiv .title{
+	font-weight: 800;
+	font-size: 24px;
+}
+.headerDiv img{
+	margin-right: 10px;
+	float: left;
+	margin-top: 8px;
+}
+.main_body{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+.login-box{
+	width: 500px;
+	height: 500px;
+	margin: 0 auto;
+	padding: 30px;
+  behavior: url(PIE.htc);
+  background: url(../img/form_bg.png) no-repeat;
+  margin-top: 100px;
+}
+.login_form{
+	width: 44%;
+  margin-left: 28%;
+	
+}
+.form_header{
+	text-align: center;
+	padding: 10px 0;
+	padding-top: 0;
+	margin-top: 60px;
+}
+.form_header img{
+	width: 70px;
+	height: 70px;
+}
+.form_header .sys_title{
+	color: #062f41;
+  font-size: 24px;
+}
+.input-group-addon{color: #999999;background: #fff; border-right: 1px solid #ccc;padding-right: 5px;}
+.form-control{    padding: 6px 0px;padding-left:5px;border-left: 0;}
+.loginbtn{    background: #0a4d92;}
+
+.err-message{
+	margin-bottom: 10px;
+	display: none;
+}
+.err-message img{width: 15px;height: 15px;}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+	border: 1px solid #CCC!important;
+}
