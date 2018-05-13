@@ -24,9 +24,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 
 /**
- * @author msy
- * @Title: 模型信息业务处理类
- * @date 2018/3/2414:40
+ * 供应商管理 业务层
+ * @author xjb
+ *
  */
 @Service
 @Transactional(readOnly = true)
@@ -36,26 +36,57 @@ public class SupplierService extends CrudService<SupplierDao, Supplier> {
     @Autowired
     private SupplierDao supplierDao;
 
-    @Autowired
-    private ThreadPoolTaskExecutor executor;
+	/**
+	 * 查询分页数据
+	 * @param page 分页对象
+	 * @param entity
+	 * @return
+	 */
+	public Page<Supplier> findPage(Page<Supplier> page,Supplier supplier) {
+		supplier.setPage(page);
+		page.setList(dao.findList(supplier));
+		return page;
+	}
+
+    
+    /**
+     * 新增供应商
+     * @param supplier
+     * @return
+     */
+	@Transactional(readOnly = false)
+	public int insert(Supplier supplier) {
+		// TODO Auto-generated method stub
+		return supplierDao.insert(supplier);
+	}
+
+
+	/**
+	 * 更新供应商
+	 * @param supplier
+	 * @return
+	 */
+	@Transactional(readOnly = false)
+	public int update(Supplier supplier) {
+		// TODO Auto-generated method stub
+		return supplierDao.update(supplier);
+	}
+
+
+	/**
+	 * 查询分页数据
+	 * @param page 分页对象
+	 * @param entity
+	 * @return
+	 */
+	public Page<Supplier> findDelPage(Page<Supplier> page,Supplier supplier) {
+		supplier.setPage(page);
+		page.setList(dao.findList(supplier));
+		return page;
+	}
     
 	
 
-//    /**
-//     * saveAndCalculate
-//     * @描述  保存并计算
-//     * @author    msy
-//     * @version
-//     * @param modelinfo
-//     * @return
-//     * @exception
-//     * @date  2018/4/3 14:57
-//     */
-//    @Transactional(readOnly = false)
-//    public void saveAndCalculate(Modelinfo modelinfo) throws Exception {
-//        this.save(modelinfo);
-//        this.calculate(modelinfo);
-//    }
 
 
 

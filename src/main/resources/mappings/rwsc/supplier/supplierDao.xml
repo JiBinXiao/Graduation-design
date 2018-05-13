@@ -7,32 +7,32 @@
     <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="sdec" property="dec" jdbcType="VARCHAR" />
+    <result column="createBy" property="createBy.username" jdbcType="VARCHAR" />
+    <result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="updateBy" property="updateBy.username" jdbcType="VARCHAR" />
+    <result column="updateDate" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="delflag" property="delflag" jdbcType="INTEGER" />
     
   </resultMap>
   <sql id="Base_Column_List" >
-    id, sname, address, phone, sdec
+    id, sname, address, phone, sdec,createBy,createDate,updateBy,updateDate,delflag
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  
+  <select id="get" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from supplier
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  
+  <delete id="deleteData" parameterType="com.trs.rwsc.modules.supplier.entity.Supplier" >
     delete from supplier
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  
+
+  
   <insert id="insert" parameterType="com.trs.rwsc.modules.supplier.entity.Supplier" >
-    insert into supplier (id, sname, address, 
-      phone, sdec, createBy, 
-      createDate, updateBy, updateDate, 
-      remark)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{dec,jdbcType=VARCHAR}, #{createby,jdbcType=VARCHAR}, 
-      #{createdate,jdbcType=TIMESTAMP}, #{updateby,jdbcType=VARCHAR}, #{updatedate,jdbcType=TIMESTAMP}, 
-      #{remark,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.trs.rwsc.modules.supplier.entity.Supplier" >
     insert into supplier
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -99,7 +99,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.trs.rwsc.modules.supplier.entity.Supplier" >
+  
+  <update id="update" parameterType="com.trs.rwsc.modules.supplier.entity.Supplier" >
     update supplier
     <set >
       <if test="name != null" >
@@ -132,26 +133,30 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.trs.rwsc.modules.supplier.entity.Supplier" >
-    update supplier
-    set sname = #{name,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      sdec = #{dec,jdbcType=VARCHAR},
-      createBy = #{createby,jdbcType=VARCHAR},
-      createDate = #{createdate,jdbcType=TIMESTAMP},
-      updateBy = #{updateby,jdbcType=VARCHAR},
-      updateDate = #{updatedate,jdbcType=TIMESTAMP},
-      remark = #{remark,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+  
+  <!-- 逻辑删除 -->
+  <update id="delete" parameterType="com.trs.rwsc.modules.supplier.entity.Supplier" >
+     update supplier set delflag=#{delflag,jdbcType=INTEGER} where id =  #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- 查询状态为 1的正常数据 -->
   	<select id="findList" resultType="Supplier">
 		SELECT
 			<include refid="Base_Column_List"/>
 		FROM supplier 
+		where delflag=1
 	</select>
+	
+	  <!-- 查询状态为 1的正常数据 -->
+  	<select id="findDelList" resultType="Supplier">
+		SELECT
+			<include refid="Base_Column_List"/>
+		FROM supplier 
+		where delflag=-1
+	</select>
+	
   <!-- 查询全部企业数目 -->
 	<select id="findAllCount" resultType="long">
-		SELECT COUNT(1) FROM supplier
+		SELECT COUNT(1) FROM supplier 
 	</select>
 </mapper>

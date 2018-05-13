@@ -18,7 +18,7 @@ import java.util.Map;
 
 /**
  * Entity支持类
- * @author ThinkGem
+ * @author xjb
  * @version 2014-05-16
  */
 @SupTreeList
