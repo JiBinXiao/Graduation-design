@@ -73,7 +73,7 @@
                         	    <td>${info.desc1} </td>
                              	<td>${info.isbn} </td>
                         
-                             	<td>   <a class="btn btn-xs btn-success btn-outline"  ><i class="fa fa-edit"></i> 采购</a></td>
+                             	<td>   <a class="btn btn-xs btn-success btn-outline" href="${ctx}/books/add?type=dangdang&id=${info.id}"><i class="fa fa-edit"></i> 采购</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>

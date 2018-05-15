@@ -10,7 +10,7 @@ import com.trs.rwsc.modules.supplier.entity.Supplier;
 
 @MyBatisDao
 public interface DangDang_BookDao extends CrudDao<DangDang_Book> {
-
+	
 	
 
 }

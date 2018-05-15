@@ -15,13 +15,20 @@
     <result column="link" property="link" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Blob_Column_List" >
-    title, prNow, prPre, author, publish, desc1, isbn, link
+    id,title, prNow, prPre, author, publish, desc1, isbn, link
   </sql>
 	<!-- 查询全部企业 -->
 	<select id="findList" resultType="DangDang_Book">
 		SELECT
 			<include refid="Blob_Column_List"/>
 		FROM db_python_dangdang 
+	</select>
+	
+
+	<select id="get" resultType="DangDang_Book" parameterType="int" >
+		SELECT
+			<include refid="Blob_Column_List"/>
+		FROM db_python_dangdang  where id = #{id}
 	</select>
 	
 	<!-- 查询全部企业数目 -->

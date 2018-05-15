@@ -50,7 +50,7 @@ public abstract class BaseEntity<T> implements Serializable {
 	 * 是否是新记录（默认：false），调用setIsNewRecord()设置新记录，使用自定义ID。
 	 * 设置为true后强制执行插入语句，ID不会自动生成，需从手动传入。
 	 */
-	protected boolean isNewRecord = false;
+	protected boolean isNewRecord ;
 
 	public BaseEntity() {
 		

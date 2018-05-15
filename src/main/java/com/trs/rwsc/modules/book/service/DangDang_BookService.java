@@ -35,6 +35,11 @@ public class DangDang_BookService extends CrudService<DangDang_BookDao, DangDang
 
     @Autowired
     private ThreadPoolTaskExecutor executor;
+
+	public  DangDang_Book get(int id) {
+		// TODO Auto-generated method stub
+		return dangDang_BookDao.get(id);
+	}
     
 	
 

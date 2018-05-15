@@ -20,7 +20,9 @@ public interface SupplierDao extends CrudDao<Supplier> {
 	 * @param supplier
 	 * @return
 	 */
-	Page<Supplier> findDelList( Supplier supplier);
+	List<Supplier> findDelList( Supplier supplier);
+
+	int checkNameisUse(Supplier supplier);
 	
 
 

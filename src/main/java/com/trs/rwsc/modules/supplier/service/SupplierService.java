@@ -81,8 +81,18 @@ public class SupplierService extends CrudService<SupplierDao, Supplier> {
 	 */
 	public Page<Supplier> findDelPage(Page<Supplier> page,Supplier supplier) {
 		supplier.setPage(page);
-		page.setList(dao.findList(supplier));
+		page.setList(dao.findDelList(supplier));
 		return page;
+	}
+
+
+	public boolean checkNameisUse(Supplier supplier) {
+		// TODO Auto-generated method stub
+		int f=supplierDao.checkNameisUse(supplier);
+		if(f==1)
+			return false;
+		else
+			return true;
 	}
     
 	

@@ -7,11 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.trs.rwsc.common.persistence.Page;
-
+import com.trs.rwsc.common.utils.RtnResult;
 import com.trs.rwsc.common.web.BaseController;
 import com.trs.rwsc.modules.book.entity.DangDang_Book;
 import com.trs.rwsc.modules.book.service.DangDang_BookService;
@@ -76,17 +75,31 @@ public class SupplierController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "insert" )
+    @RequestMapping(value = "add" )
+    @ResponseBody
     public String insert(Supplier supplier,HttpServletRequest request, HttpServletResponse response, Model model) {
-    	boolean flag=false;
+    
     	supplier.setIsNewRecord(true);
-    	int result=supplierService.save(supplier);
-    	if(result == 1)
-    		flag=true;
-	    Page<Supplier> page = supplierService.findPage(new Page<Supplier>(request, response), supplier);
-	    model.addAttribute("page", page);
-    	return "supplier/list";
+    
+    	supplier.setDelflag(1);
+    	int ret=supplierService.save(supplier);
+        
+    	String msg="保存失败";
+        if(ret==1){
+            msg = "保存成功！";
+        }
+        return RtnResult.successInfo(msg, null);
+
     }
+    
+    @RequestMapping(value = "detail" )
+    public String detail(Supplier supplier, Model model) {
+
+    	supplier=supplierService.get(supplier.getId());
+	    model.addAttribute("supplier", supplier);
+    	return "supplier/detail";
+    }
+    
     
     /**
      * 更新企业
@@ -109,6 +122,26 @@ public class SupplierController extends BaseController {
     }
     
     /**
+     * 恢复企业
+     * @param supplier
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "recover" )
+    public String recover(Supplier supplier,HttpServletRequest request, HttpServletResponse response, Model model) {
+    	boolean flag=false;
+    	supplier.setDelflag(1);
+    	int result=supplierService.delete(supplier);
+    	if(result == 1)
+    		flag=true;
+	    Page<Supplier> page = supplierService.findPage(new Page<Supplier>(request, response), supplier);
+	    model.addAttribute("page", page);
+	    return "supplier/list";
+    }
+    
+    /**
      * 逻辑删除 修改delflag 为 -1 放入回收站
      * @param supplier
      * @param request
@@ -119,6 +152,7 @@ public class SupplierController extends BaseController {
     @RequestMapping(value = "delete")
     public String deleteData(Supplier supplier,HttpServletRequest request, HttpServletResponse response, Model model) {
     	boolean flag=false;
+    	supplier.setDelflag(-1);
     	int result=supplierService.delete(supplier);
     	if(result == 1)
     		flag=true;
@@ -148,13 +182,26 @@ public class SupplierController extends BaseController {
     	return "supplier/list";
     }
     
+    @RequestMapping(value = "checkName")
+    @ResponseBody
+    public String CheckName(Supplier supplier, HttpServletRequest request, HttpServletResponse response, Model model) {
+    	
+        boolean flag=supplierService.checkNameisUse(supplier);
+        model.addAttribute("supplier", supplier);	
+        if( flag ) 
+        	 return RtnResult.successInfo("",null);
+        else
+        	 return RtnResult.errorInfo("", null);
+
+    }
+    
     /**
      * 前往更新页面
      * @param supplier
      * @param model
      * @return
      */
-    @RequestMapping(value = "gotoUpdate")
+    @RequestMapping(value = "gotoupdate")
     public String gotoUpdate(Supplier supplier, Model model) {
     	supplier=supplierService.get(supplier.getId());
     	model.addAttribute("supplier",supplier);
@@ -167,10 +214,10 @@ public class SupplierController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "gotoInsert")
+    @RequestMapping(value = "gotoadd")
     public String gotoInsert() {
     	
-    	return "supplier/insert";
+    	return "supplier/add";
     }
  
     
