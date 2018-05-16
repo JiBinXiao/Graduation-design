@@ -41,7 +41,11 @@ public class BookController extends BaseController {
      */
     @RequestMapping(value = "dangdang")
     public String dangDanglist(DangDang_Book douBan_Book, HttpServletRequest request, HttpServletResponse response, Model model) {
-
+    	String word=request.getParameter("word");
+    	if("java" .equals(word)) {
+    		
+    	}
+    		
         Page<DangDang_Book> page = douBan_BookService.findPage(new Page<DangDang_Book>(request, response), douBan_Book);
 
         model.addAttribute("page", page);
@@ -57,6 +61,13 @@ public class BookController extends BaseController {
         model.addAttribute("page", page);
         
         return "modules/book/jingdonglist";
+    }
+    
+    @RequestMapping(value = "list")
+    public String list(JD_Book jd_Book, HttpServletRequest request, HttpServletResponse response, Model model) {
+
+      
+        return "modules/book/list";
     }
     
  

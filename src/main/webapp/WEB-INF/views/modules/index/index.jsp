@@ -42,7 +42,7 @@
 			<!--主成分析-->
 			<div class="sBox">
 				<div class="subNav subNav_no  active">
-					<a href="${ctx}/book/dangdang" target="right" class="J_menuItem J_tabShowActive">
+					<a href="${ctx}/book/list" target="right" class="J_menuItem J_tabShowActive">
 						<i class="fa fa-empire" title="采购管理"></i>
 						<span class="sublist-title">采购管理</span><span class="glyphicon glyphicon-chevron-up" style="display: none;"></span>
 					</a>
@@ -52,7 +52,7 @@
 			
 			<div class="sBox">
 				<div class="subNav subNav_no  active">
-					<a href="${ctx}/company_info/list" target="right" class="J_menuItem J_tabShowActive">
+					<a href="${ctx}/orders/list" target="right" class="J_menuItem J_tabShowActive">
 						<i class="fa fa-empire" title="订单管理"></i>
 						<span class="sublist-title">订单管理</span><span class="glyphicon glyphicon-chevron-up" style="display: none;"></span>
 					</a>
@@ -108,7 +108,7 @@
 			</button>
 			<div class="page-tabs J_menuTabs">
 				<div class="page-tabs-content">
-					<a href="javascript:;" id="homeTab" class="active J_menuTab" data-id="${ctx}/book/dangdang" >采购管理</a>
+					<a href="javascript:;" id="homeTab" class="active J_menuTab" data-id="${ctx}/book/list" >采购管理</a>
 				</div>
 			</div>
 			<button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
@@ -135,7 +135,7 @@
 					<p>数据加载中,请稍后...</p>
 				</div>
 			</div>
-			<iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="${ctx}/book/dangdang" frameborder="0" data-id="${ctx}/book/dangdang" seamless></iframe>
+			<iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="${ctx}/book/list" frameborder="0" data-id="${ctx}/book/list" seamless></iframe>
 		</div>
 		<%--<div class="footer">
 			<div class="text-right">主办单位： &nbsp;&nbsp;&nbsp;&copy 技术支持：
