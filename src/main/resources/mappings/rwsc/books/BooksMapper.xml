@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.trs.rwsc.modules.books.dao.BooksMapper" >
+  <resultMap id="BaseResultMap" type="com.trs.rwsc.modules.books.entity.Books" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="publish" property="publish" jdbcType="VARCHAR" />
+    <result column="dec1" property="dec1" jdbcType="VARCHAR" />
+    <result column="ISBN" property="isbn" jdbcType="VARCHAR" />
+    <result column="linkUrl" property="linkurl" jdbcType="VARCHAR" />
+    <result column="origin" property="origin" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, price,author, publish, dec1, ISBN, linkUrl, origin
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from books
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from books
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.trs.rwsc.modules.books.entity.Books" >
+    insert into books (id, name, author, 
+      publish, dec1, ISBN, 
+      linkUrl, origin)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{publish,jdbcType=VARCHAR}, #{dec1,jdbcType=VARCHAR}, #{isbn,jdbcType=VARCHAR}, 
+      #{linkurl,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.trs.rwsc.modules.books.entity.Books" >
+    insert into books
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="publish != null" >
+        publish,
+      </if>
+      <if test="dec1 != null" >
+        dec1,
+      </if>
+      <if test="isbn != null" >
+        ISBN,
+      </if>
+      <if test="linkurl != null" >
+        linkUrl,
+      </if>
+      <if test="origin != null" >
+        origin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+       <if test="price != null" >
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="publish != null" >
+        #{publish,jdbcType=VARCHAR},
+      </if>
+      <if test="dec1 != null" >
+        #{dec1,jdbcType=VARCHAR},
+      </if>
+      <if test="isbn != null" >
+        #{isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="linkurl != null" >
+        #{linkurl,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null" >
+        #{origin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.trs.rwsc.modules.books.entity.Books" >
+    update books
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="publish != null" >
+        publish = #{publish,jdbcType=VARCHAR},
+      </if>
+      <if test="dec1 != null" >
+        dec1 = #{dec1,jdbcType=VARCHAR},
+      </if>
+      <if test="isbn != null" >
+        ISBN = #{isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="linkurl != null" >
+        linkUrl = #{linkurl,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null" >
+        origin = #{origin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.trs.rwsc.modules.books.entity.Books" >
+    update books
+    set name = #{name,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      publish = #{publish,jdbcType=VARCHAR},
+      dec1 = #{dec1,jdbcType=VARCHAR},
+      ISBN = #{isbn,jdbcType=VARCHAR},
+      linkUrl = #{linkurl,jdbcType=VARCHAR},
+      origin = #{origin,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="get" parameterType="string" resultMap="BaseResultMap">
+  	select * from books where name=#{name}
+  </select>
+</mapper>

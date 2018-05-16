@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="renderer" content="webkit">
-    <title>供应商管理</title>
+    <title>供应商管理——回收站</title>
     <link rel="stylesheet" href="${ctxStatic}/css/bootstrap.min.css" title="" />
     <link rel="stylesheet" type="text/css" href="${ctxStatic}/css/plugins/datapicker/bootstrap-datetimepicker.css" />
     <!--<link rel="stylesheet" type="text/css" href="css/animate.css" />-->
@@ -27,19 +27,18 @@
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-xs-12">
-            <blockquote class="text-primary gray-bg-high"><i class="fa fa-codepen text-primary"></i> 供应商列表
-                <form id="searchForm" action="${ctx}/factor/list" method="post" class="form-inline m-t-sm">
+            <blockquote class="text-primary gray-bg-high"><i class="fa fa-codepen text-primary"></i> 供应商列表——回收站
+                <form id="searchForm" action="${ctx}/supplier/search" method="post" class="form-inline m-t-sm">
                     <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
                     <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
                     <div class="form-group">
                         <label  class="control-label">供应商名称:</label>
-                        <input type="text" placeholder="请输入供应商名称" name="modelname" value="${modelinfo.modelname}" class="form-control">
+                        <input type="text" placeholder="请输入供应商名称" name="modelname" value="${supplier.sname}" class="form-control">
                     </div>
                   
-                    <a class="btn btn-sm btn-warning  m-l-sm pull-right" href="${ctx}/factor/form"><i class="fa fa-plus"></i> 新增</a>
-                    <a id="resetBtn" class="btn btn-sm  btn-success btn-outline m-l-sm pull-right"><i class="fa fa-refresh"></i> 重置</a>
+
                     <a href="#" class="btn btn-success btn-sm m-l-md pull-right" id="search"><i class="fa fa-search"></i> 查询</a>
-                	                     <a href="${ctx}/company_info/delList" class="btn btn-success btn-sm m-l-md pull-right" id="search"><i class="fa fa-search"></i> 回收站</a>
+                	<a href="${ctx}/supplier/list" class="btn btn-success btn-sm m-l-md pull-right" id="search"><i class="fa fa-search"></i> 返回</a>
                 </form>
             </blockquote>
         </div>
@@ -71,9 +70,11 @@
                                 <td>${info.sdec} </td>
                         	   
                         
-                             	<td>   <a class="btn btn-xs btn-success btn-outline"  ><i class="fa fa-edit"></i> 修改</a>
-                             	<a class="btn btn-xs btn-success btn-outline"  ><i class="fa fa-edit"></i> 删除</a>
-                           
+                             	<td> 
+                             	   <a class="btn btn-xs btn-success btn-outline" href="${ctx}/supplier/detail?id=${info.id}" ><i class="fa fa-edit"></i> 查看详情</a>
+ 								<a class="btn btn-xs btn-success btn-outline" href="${ctx}/supplier/deleteData?id=${info.id}" onclick="return confirm('确定删除当前数据?');"><i class="fa fa-edit"></i>删除</a>		
+                                   <a class="btn btn-xs btn-success btn-outline" href="${ctx}/supplier/recover?id=${info.id}" onclick="return confirm('确定恢复当前数据?');"><i class="fa fa-edit"></i>恢复</a>
+                          
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -114,7 +115,7 @@
                 .val('')
                 .removeAttr('checked')
                 .removeAttr('selected');
-            $('#searchForm').attr('action',"${ctx}/factor/list");
+            $('#searchForm').attr('action',"${ctx}/supplier/list");
             $('#searchForm').submit();
         });
 

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="renderer" content="webkit">
-    <title>新增主成分析模型</title>
+    <title>新增企业</title>
     <link rel="stylesheet" href="${ctxStatic}/css/bootstrap.min.css" title="" />
     <!--<link rel="stylesheet" type="text/css" href="css/animate.css" />-->
     <link rel="stylesheet" type="text/css" href="${ctxStatic}/css/admin.css" />
@@ -131,30 +131,27 @@
                             <a href="javascript:history.go(-1);" class="m-l-sm btn btn-primary pull-right btn-sm" id="">
                                 <i class="fa fa-reply "></i> 返回
                             </a>
-                            <a href="#" class="btn btn-warning pull-right btn-sm" id="run">
-                                <i class="fa fa-hand-pointer-o "></i> 运行
-                            </a>
+                          
 
-                            <i class="fa fa-slideshare"></i> 主成分析编辑
+                            <i class="fa fa-slideshare"></i> 新增企业
                         </h3>
                         <hr>
                         <form id="wizForm" action="#" class="form-horizontal" style=" padding: 30px 15px;">
-                            <input type="hidden" id="fields" value="${fields}"/>
-                            <input type="hidden" name="id" value="${modelinfo.id}"/>
+                      
                             <div class="wizard-form" id="formWizard">
                                 <div class="wizard-content">
                                     <ul class="nav nav-pills nav-justified steps">
                                         <li>
                                             <a href="#step1" data-toggle="tab" class="wiz-step">
                                                 <span class="step-number"> <img src="${ctxStatic}/img/step_one.png"/> </span>
-                                                <span class="step-name">模型基本信息 </span>
+                                                <span class="step-name">企业名称 </span>
                                             </a>
                                         </li>
 
                                         <li>
                                             <a href="#step2" data-toggle="tab" class="wiz-step">
                                                 <span class="step-number"><img src="${ctxStatic}/img/step_two.png"/></span>
-                                                <span class="step-name">数据源设置</span>
+                                                <span class="step-name">企业基本信息</span>
                                             </a>
                                         </li>
                                         <li>
@@ -177,61 +174,41 @@
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="step1">
                                             <div class="form-group">
-                                                <label class="control-label col-md-3"><span class="red_text">*</span> 模型名称</label>
+                                                <label class="control-label col-md-3"><span class="red_text">*</span> 企业名称</label>
                                                 <div class="col-md-7">
-                                                    <input type="text" id="modelname" class="form-control" name="modelname" value="${modelinfo.modelname}" maxlength="100" placeholder="模型名称" data-bv-notempty data-bv-notempty-message="模型名称不能为空" />
+                                                    <input type="text" id="modelname" class="form-control" name="custCfname" value="${company_Info.custCfname}" maxlength="100" placeholder="企业名称" data-bv-notempty data-bv-notempty-message="企业名称不能为空" />
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">模型介绍</label>
-                                                <div class="col-md-7">
-                                                    <textarea name="modeldesc" rows="" cols="" style="margin: 0px 2.6625px 0px 0px; width: 659px; height: 105px;" placeholder="请输入模型源介绍" class="form-control" maxlength="500">${modelinfo.modeldesc}</textarea>
-                                                </div>
-                                            </div>
+                                 
                                         </div>
 
                                         <div class="tab-pane" id="step2">
                                             <div class="form-group">
-                                                <label class="control-label col-md-3"><span class="red_text">*</span> 数据库</label>
+                                                <label class="control-label col-md-3"> 企业简称</label>
                                                 <div class="col-md-7">
-                                                    <select id="database" name="baseid" class="form-control" onchange="changeDataBase(this.value)" data-bv-notempty data-bv-notempty-message="数据库不能为空">
-                                                        <option value="">请选择数据库</option>
-                                                        <c:forEach items="${databaseList}" var="database">
-                                                            <option value="${database.id }" <c:if test="${database.id==modelinfo.baseid}">selected="selected"</c:if>>
-                                                                ${database.schema}_${database.name}
-                                                            </option>
-                                                        </c:forEach>
-                                                    </select>
+                                                    <input type="text" id="modelname" class="form-control" name="custCfname" value="${company_Info.custCfname}" maxlength="100" placeholder="企业简称"  />
+                                                </div>
+                                            </div>
+                                              <div class="form-group">
+                                                <label class="control-label col-md-3">英文全称</label>
+                                                <div class="col-md-7">
+                                                    <input type="text" id="modelname" class="form-control" name="custCfname" value="${company_Info.custCfname}" maxlength="100" placeholder="英文全称"  />
+                                                </div>
+                                            </div>
+                                              <div class="form-group">
+                                                <label class="control-label col-md-3"> 英文简称</label>
+                                                <div class="col-md-7">
+                                                    <input type="text" id="modelname" class="form-control" name="custCfname" value="${company_Info.custCfname}" maxlength="100" placeholder="英文简称" />
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3"><span class="red_text">*</span> 数据源类型</label>
+                                                <label class="control-label col-md-3"> 企业类型</label>
                                                 <div class="col-md-7">
-                                                    <input type="radio" name="sourcetype" id="sourcetab" value="1" <c:if test="${modelinfo.sourcetype ne '2'}">checked="checked"</c:if>/> 表
-                                                    <input type="radio" name="sourcetype" id="sourceview" value="2" <c:if test="${modelinfo.sourcetype eq '2'}">checked="checked"</c:if>/> 视图
+                                                    <input type="text" id="modelname" class="form-control" name="custCfname" value="${company_Info.custCfname}" maxlength="100" placeholder="企业类型" />
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3"><span class="red_text">*</span> 数据源名称</label>
-                                                <div class="col-md-7">
-                                                    <select id="sourcename" name="sourcename" class="form-control"  data-bv-notempty data-bv-notempty-message="数据源名称不能为空">
-                                                        <option value="">请选择数据源</option>
-                                                        <c:forEach items="${tabList}" var="tab">
-                                                            <option value="${tab.table_name }" <c:if test="${tab.table_name==modelinfo.sourcename}">selected="selected"</c:if>>
-                                                                    ${tab.table_name}_${tab.table_comment}
-                                                            </option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">数据源介绍</label>
-                                                <div class="col-md-7">
-                                                    <textarea name="sourcedesc" rows="" cols="" placeholder="请输入数据源介绍" style="margin: 0px 0.6625px 0px 0px; width: 660px; height: 104px;" class="form-control" maxlength="500">${modelinfo.sourcedesc}</textarea>
-                                                </div>
-                                            </div>
+                               
                                         </div>
                                         <div class="tab-pane" id="step3">
                                             <div class="scrollTable m-b-md" id="scrollTable">
@@ -269,25 +246,12 @@
                                         </div>
                                         <div class="tab-pane" id="step4">
                                             <div class="form-group">
-                                                <label class="control-label col-md-3"><span class="red_text">*</span> 平均值系数</label>
+                                                <label class="control-label col-md-3"><span class="red_text">*</span> 所选特征数</label>
                                                 <div class="col-md-7">
-                                                    <input type="text" name="modelparam1" value="<c:if test="${empty modelinfo.modelparam1 }">1</c:if><c:if test="${not empty modelinfo.modelparam1 }">${modelinfo.modelparam1}</c:if>" class="form-control" placeholder="特征系数" data-bv-notempty data-bv-notempty-message="不能为空" data-bv-regexp="true" data-bv-regexp-regexp="(^[0-9][0-9]{0,11}$)|(^\+?(\d{0,12}\.\d{2})$)|(^\+?(\d{0,12}\.\d{1})$)" data-bv-regexp-message="只能输入数字:整数位不得超过12位 小数不得超过2位" />
+                                                    <input type="text" name="modelparam1" value="<c:if test="${empty modelinfo.modelparam1 }">1</c:if><c:if test="${not empty modelinfo.modelparam1 }">${modelinfo.modelparam1}</c:if>" class="form-control" placeholder="特征系数" data-bv-notempty data-bv-notempty-message="不能为空" data-bv-regexp="true" data-bv-regexp-regexp="(^[0-9]\d*$)" data-bv-regexp-message="只能输入正整数"/>
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3"><span class="red_text">*</span> 特征系数</label>
-                                                <div class="col-md-7">
-                                                    <input type="text" name="modelparam2" value="<c:if test="${empty modelinfo.modelparam2 }">1</c:if><c:if test="${not empty modelinfo.modelparam2 }">${modelinfo.modelparam2}</c:if>" class="form-control" placeholder="特征系数" data-bv-notempty data-bv-notempty-message="不能为空" data-bv-regexp="true" data-bv-regexp-regexp="(^[0-9][0-9]{0,11}$)|(^\+?(\d{0,12}\.\d{2})$)|(^\+?(\d{0,12}\.\d{1})$)" data-bv-regexp-message="只能输入数字:整数位不得超过12位 小数不得超过2位" />
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3"><span class="red_text">*</span> 降纬数目</label>
-                                                <div class="col-md-7">
-                                                    <input type="text" name="modelparam3" value="<c:if test="${empty modelinfo.modelparam3 }">1</c:if><c:if test="${not empty modelinfo.modelparam3 }"><fmt:formatNumber value="${modelinfo.modelparam3}" pattern="##"/></c:if>" class="form-control" placeholder="降纬数目" data-bv-notempty data-bv-notempty-message="不能为空" data-bv-regexp="true" data-bv-regexp-regexp="(^[0-9]\d*$)" data-bv-regexp-message="只能输入正整数"/>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -298,9 +262,9 @@
                                                 <a href="javascript:;" class="btn btn-default prevBtn btn-sm">
                                                     <i class="fa fa-arrow-circle-left"></i> 上一步
                                                 </a>
-                                               <%-- <a href="javascript:;" class="btn btn-success first_step btn-sm" id="first_stepsave">
-                                                    <i class="fa fa-save"></i> 保存
-                                                </a>--%>
+                                               <a href="javascript:;" class="btn btn-success first_step btn-sm" id="first_stepsave">
+                                                    <i class="fa fa-save"></i> 验证全称是否可用
+                                                </a>
                                                 <a href="javascript:;" class="btn btn-primary hidden two_step btn-sm" id="two_step1">
                                                     测试 <i class="fa fa-cloud-upload"></i>
                                                 </a>
@@ -398,22 +362,45 @@
                 })
             }
         });
-
-        //测试数据源连接是否正常
-        $('#two_step1').click(function(){
-            var baseid = $("#database").val();
+        //验证全称是否可用是否正常
+        $('#first_stepsave').click(function(){
+            var baseid = $("#custCfname").val();
             if (baseid != "") {
                 $.ajax({
-                    url: "${ctx}/modelinfo/testDataBase?ran="+Math.random(),
+                    url: "${ctx}/company_info/add?ran="+Math.random(),
                     type: "get",
-                    data: {"baseid":$("#database").val()},
+                    data: {"custCfname":$("#custCfname").val()},
                     dataType:"json",
                     success:function(data){
                         if(data.success){
-                            top.$.jBox.success("数据库配置正确！");
+                            top.$.jBox.success("企业名称可用！");
                             return false;
                         } else {
-                            top.$.jBox.error("数据库配置错误，请检查数据库连接、用户名和密码信息是否正确！");
+                            top.$.jBox.error("此企业已经存在！");
+                            return false;
+                        }
+                    },
+                    error : function(XMLHttpRequest, textStatus, errorThrown) {
+                        top.$.jBox.error("系统内部错误！！", "系统提示");
+                    }
+                })
+            }
+        });
+        //测试数据源连接是否正常
+        $('#two_step1').click(function(){
+            var baseid = $("#custCfname").val();
+            if (baseid != "") {
+                $.ajax({
+                    url: "${ctx}/company_Info?ran="+Math.random(),
+                    type: "get",
+                    data: {"custCfname":$("#custCfname").val()},
+                    dataType:"json",
+                    success:function(data){
+                        if(data.success){
+                            top.$.jBox.success("企业名称正确！");
+                            return false;
+                        } else {
+                            top.$.jBox.error("此企业已经存在！");
                             return false;
                         }
                     },
@@ -429,7 +416,7 @@
             var database = $("#database").val();
             if(database == '' ) {
                 top.$.jBox.error("数据源未配置,无法运行！");
-                return　false;
+                return false;
             }
             var sourcename = $("#sourcename").val();
             if (sourcename === '') {
@@ -447,14 +434,14 @@
                 var params = $("#wizForm").serialize();
                 if (v == "ok"){
                     $.ajax({
-                        url: "${ctx}/principal/saveAndCalculate?ran="+Math.random(),
+                        url: "${ctx}/factor/saveAndCalculate?ran="+Math.random(),
                         type: "post",
                         data: params,
                         dataType:"json",
                         success:function(data){
                             if(data.success){
                                 top.$.jBox.success(data.msg, "系统提示");
-                                location.href = "${ctx}/principal/list";
+                                location.href = "${ctx}/factor/list";
                             } else {
                                 top.$.jBox.error("模型运算启动失败！！", "系统提示");
                                 return false;
@@ -553,12 +540,6 @@
     }
 
     function formSubmit(){
-        var le = $("input[name='sourcefields']").length;
-        if (le == 0) {
-            if ($("#fields").val() != '') {
-                le = $("#fields").val().split(",").length;
-            }
-        }
         $("#wizForm").bootstrapValidator({
             feedbackIcons:{
                 valid:"glyphicon glyphicon-ok",
@@ -573,14 +554,6 @@
                             message: '备注不得超过200字'
                         }
                     }
-                },
-                modelparam3 : {
-                    validators: {
-                        lessThan : {
-                            value: le,
-                            message: '降纬数目不得超过选取的字段数目'
-                        }
-                    }
                 }
             }
         });
@@ -589,14 +562,15 @@
             top.$.jBox.confirm("确定提交吗？","系统提示",function(v, h,f) {
                 if (v == "ok"){
                     var params = $("#wizForm").serialize();
+                    debugger
                     $.ajax({
                         type : "POST",
-                        url : "${ctx}/principal/save",
+                        url : "${ctx}/factor/save",
                         data : params,
                         success : function(data) {
                             if (JSON.parse(data).success) {
                                 top.$.jBox.success(JSON.parse(data).msg,'系统提示',{ closed: function () {
-                                        location.href = "${ctx}/principal/list";
+                                        location.href = "${ctx}/factor/list";
                                     }
                                 });
                             }else{

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.trs.rwsc.modules.order.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.trs.rwsc.modules.order.entity.Order" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="origin" property="origin" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="st" property="st" jdbcType="INTEGER" />
+    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="receiving_unit" property="receivingUnit" jdbcType="VARCHAR" />
+    <result column="receiving_person" property="receivingPerson" jdbcType="VARCHAR" />
+    <result column="receiving_address" property="receivingAddress" jdbcType="VARCHAR" />
+    <result column="receiving_phone" property="receivingPhone" jdbcType="VARCHAR" />
+    <result column="book_id" property="bookId" jdbcType="INTEGER" />
+    <result column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, num, origin, price, st, createdate, receiving_unit, receiving_person,receiving_address, receiving_phone, 
+    book_id, supplier_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from orders
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.trs.rwsc.modules.order.entity.Order" >
+    insert into orders (id, num, origin, 
+      price, st, createdate, 
+      receiving_unit, receiving_person, receiving_phone, 
+      book_id, supplier_id)
+    values (#{id,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, #{origin,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DOUBLE}, #{st,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{receivingUnit,jdbcType=VARCHAR}, #{receivingPerson,jdbcType=VARCHAR}, #{receivingPhone,jdbcType=VARCHAR}, 
+      #{bookId,jdbcType=INTEGER}, #{supplierId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.trs.rwsc.modules.order.entity.Order" >
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="origin != null" >
+        origin,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="st != null" >
+        st,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="receivingUnit != null" >
+        receiving_unit,
+      </if>
+      <if test="receivingPerson != null" >
+        receiving_person,
+      </if>
+       <if test="receivingAddress != null" >
+        receiving_address,
+      </if>
+      <if test="receivingPhone != null" >
+        receiving_phone,
+      </if>
+      <if test="bookId != null" >
+        book_id,
+      </if>
+      <if test="supplierId != null" >
+        supplier_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="origin != null" >
+        #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="st != null" >
+        #{st,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receivingUnit != null" >
+        #{receivingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingPerson != null" >
+        #{receivingPerson,jdbcType=VARCHAR},
+      </if>
+       <if test="receivingAddress != null" >
+        #{receivingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingPhone != null" >
+        #{receivingPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bookId != null" >
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.trs.rwsc.modules.order.entity.Order" >
+    update orders
+    <set >
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="origin != null" >
+        origin = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="st != null" >
+        st = #{st,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receivingUnit != null" >
+        receiving_unit = #{receivingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingPerson != null" >
+        receiving_person = #{receivingPerson,jdbcType=VARCHAR},
+      </if>
+       <if test="receivingAddress != null" >
+        receiving_address = #{receivingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingPhone != null" >
+        receiving_phone = #{receivingPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bookId != null" >
+        book_id = #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierId != null" >
+        supplier_id = #{supplierId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <!-- 查询全部企业数目 -->
+	<select id="findAllCount" resultType="long">
+		SELECT COUNT(1) FROM orders 
+	</select>
+    
+  <!-- 查询状态为 1的正常数据 -->
+  	<select id="findList" resultType="com.trs.rwsc.modules.order.entity.Order">
+		SELECT
+			<include refid="Base_Column_List"/>
+		FROM orders 
+		
+	</select>
+</mapper>
