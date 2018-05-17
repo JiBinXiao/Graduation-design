@@ -7,6 +7,7 @@ import com.trs.rwsc.common.persistence.Page;
 
 public class Order extends DataEntity<Order>{
 
+	private String name;
 
     private Integer num;
 
@@ -33,7 +34,15 @@ public class Order extends DataEntity<Order>{
 
 
 
-    public Integer getNum() {
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getNum() {
         return num;
     }
 

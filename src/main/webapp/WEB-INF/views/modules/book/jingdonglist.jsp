@@ -36,9 +36,9 @@
                         <input type="text" placeholder="请输入书籍名称" name="modelname" value="${modelinfo.modelname}" class="form-control">
                     </div>
                 
-                    <a class="btn btn-sm btn-warning  m-l-sm pull-right" href="${ctx}/book/dangdang"><i class="fa fa-plus"></i> 当当</a>
-                    <a  class="btn btn-sm  btn-success btn-outline m-l-sm pull-right" href="${ctx}/book/jingdong"><i class="fa fa-refresh"></i> 京东</a>
-                    <a href="#" class="btn btn-success btn-sm m-l-md pull-right"  href="${ctx}/book/yamaxun"><i class="fa fa-search"></i> 亚马逊</a>
+                    <a class="btn btn-sm btn-warning  m-l-sm pull-right" href="${ctx}/book/dangdang?type=${type}"><i class="fa fa-plus"></i> 当当</a>
+                    <a  class="btn btn-sm  btn-success btn-outline m-l-sm pull-right" href="${ctx}/book/jingdong?type=${type}"><i class="fa fa-refresh"></i> 京东</a>
+                    <a href="#" class="btn btn-success btn-sm m-l-md pull-right"  href="${ctx}/book/yamaxun?type=${type}"><i class="fa fa-search"></i> 亚马逊</a>
                 </form>
             </blockquote>
         </div>
@@ -55,6 +55,7 @@
                         <th>出版社</th>
                      
                          <th>ISBN号</th>
+                          <th>爬取时间</th>
                          <th>操作</th>
                     </tr>
                     </thead>
@@ -68,11 +69,12 @@
                                 <td><a href="${info.link}"  target="_blank" >${info.title}</a> </td>
                              	<td>${info.prnow} </td>
 
-                                <td>${info.pb} </td>
+                                <td>${info.publish} </td>
                       
                              	<td>${info.isbn} </td>
+                             	<td>${info.createdate} </td>
                         
-                             	<td>   <a class="btn btn-xs btn-success btn-outline"  ><i class="fa fa-edit"></i> 采购</a></td>
+                             	<td>   <a class="btn btn-xs btn-success btn-outline" href="${ctx}/books/add?origin=jingdong&id=${info.id}"  ><i class="fa fa-edit"></i> 采购</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>

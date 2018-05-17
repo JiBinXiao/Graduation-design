@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.trs.rwsc.common.persistence.Page;
 
 import com.trs.rwsc.common.web.BaseController;
-import com.trs.rwsc.modules.book.entity.DangDang_Book;
-import com.trs.rwsc.modules.book.entity.JD_Book;
-import com.trs.rwsc.modules.book.service.DangDang_BookService;
-import com.trs.rwsc.modules.book.service.JD_BookService;
-import com.trs.rwsc.modules.company.entity.Company_Info;
+import com.trs.rwsc.modules.book.entity.DB_DangDang;
+import com.trs.rwsc.modules.book.entity.DB_JingDong;
+import com.trs.rwsc.modules.book.service.DB_DangDangService;
+import com.trs.rwsc.modules.book.service.DB_JingDongService;
+
+
 
 
 @Controller
@@ -25,46 +26,40 @@ import com.trs.rwsc.modules.company.entity.Company_Info;
 public class BookController extends BaseController {
 	
     @Autowired
-    private DangDang_BookService douBan_BookService;
-    
-    @Autowired
-    private JD_BookService jd_BookService;
+    private DB_DangDangService db_DangDangService;
 	  
+    @Autowired
+    private DB_JingDongService dB_JingDongService;
     
-    /**
-     * 
-     * @param modelinfo
-     * @param request
-     * @param response
-     * @param model
-     * @return
-     */
+
     @RequestMapping(value = "dangdang")
-    public String dangDanglist(DangDang_Book douBan_Book, HttpServletRequest request, HttpServletResponse response, Model model) {
-    	String word=request.getParameter("word");
-    	if("java" .equals(word)) {
-    		
-    	}
-    		
-        Page<DangDang_Book> page = douBan_BookService.findPage(new Page<DangDang_Book>(request, response), douBan_Book);
+    public String dangDanglist(DB_DangDang db_DangDang, HttpServletRequest request, HttpServletResponse response, Model model) {
+    	String type=request.getParameter("type");
+    	db_DangDang.setType(type);
+    	
+        Page<DB_DangDang> page = db_DangDangService.findPage(new Page<DB_DangDang>(request, response), db_DangDang);
 
         model.addAttribute("page", page);
+        model.addAttribute("type", type);
         
         return "modules/book/dangdanglist";
     }
     
+    
+    
     @RequestMapping(value = "jingdong")
-    public String jingDonglist(JD_Book jd_Book, HttpServletRequest request, HttpServletResponse response, Model model) {
-
-        Page<JD_Book> page = jd_BookService.findPage(new Page<JD_Book>(request, response), jd_Book);
+    public String jingDonglist(DB_JingDong db_JingDong, HttpServletRequest request, HttpServletResponse response, Model model) {
+    	String type=request.getParameter("type");
+    	db_JingDong.setType(type);
+        Page<DB_JingDong> page = dB_JingDongService.findPage(new Page<DB_JingDong>(request, response), db_JingDong);
 
         model.addAttribute("page", page);
-        
+        model.addAttribute("type", type);
         return "modules/book/jingdonglist";
     }
     
     @RequestMapping(value = "list")
-    public String list(JD_Book jd_Book, HttpServletRequest request, HttpServletResponse response, Model model) {
+    public String list( HttpServletRequest request, HttpServletResponse response, Model model) {
 
       
         return "modules/book/list";

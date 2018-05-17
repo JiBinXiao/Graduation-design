@@ -205,7 +205,7 @@
                                                 <label class="control-label col-md-3"><span class="red_text">*</span>图书名称</label>
                                                 <div class="col-md-7">
                              		                  <span > ${books.name}</span>
-                             		                  <input name="" type="hidden" value=" ${books.name}" />
+                             		                  <input name="name" type="hidden" value=" ${books.name}" />
                                                  
                                                 </div>
                                             </div>
@@ -232,6 +232,7 @@
                                                 <div class="col-md-7">
                                               
                                                   ${books.origin}
+                                                  
                                                 </div>
                                             </div>
                                               <div class="form-group">
@@ -389,7 +390,7 @@
                         success : function(data) {
                             if (JSON.parse(data).success) {
                                 top.$.jBox.success(JSON.parse(data).msg,'系统提示',{ closed: function () {
-                                        location.href = "${ctx}/book/dangdang";
+                                        location.href = "${ctx}/orders/list";
                                     }
                                 });
                             }else{

@@ -28,7 +28,7 @@
     <div class="row">
         <div class="col-xs-12">
             <blockquote class="text-primary gray-bg-high"><i class="fa fa-codepen text-primary"></i>采购列表——当当
-                <form id="searchForm" action="${ctx}/factor/list" method="post" class="form-inline m-t-sm">
+                <form id="searchForm" action="${ctx}/book/list" method="post" class="form-inline m-t-sm">
                     <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
                     <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
                     <div class="form-group">
@@ -36,9 +36,9 @@
                         <input type="text" placeholder="请输入书籍名称" name="modelname" value="${modelinfo.modelname}" class="form-control">
                     </div>
                 
-                    <a class="btn btn-sm btn-warning  m-l-sm pull-right" href="${ctx}/book/dangdang"><i class="fa fa-plus"></i> 当当</a>
-                    <a  class="btn btn-sm  btn-success btn-outline m-l-sm pull-right" href="${ctx}/book/jingdong"><i class="fa fa-refresh"></i> 京东</a>
-                    <a href="#" class="btn btn-success btn-sm m-l-md pull-right"  href="${ctx}/book/yamaxun"><i class="fa fa-search"></i> 亚马逊</a>
+                    <a class="btn btn-sm btn-warning  m-l-sm pull-right" href="${ctx}/book/dangdang?type=${type}"><i class="fa fa-plus"></i> 当当</a>
+                    <a  class="btn btn-sm  btn-success btn-outline m-l-sm pull-right" href="${ctx}/book/jingdong?type=${type}"><i class="fa fa-refresh"></i> 京东</a>
+                    <a href="#" class="btn btn-success btn-sm m-l-md pull-right"  href="${ctx}/book/yamaxun?type=${type}"><i class="fa fa-search"></i> 亚马逊</a>
                 </form>
             </blockquote>
         </div>
@@ -73,7 +73,7 @@
                         	    <td>${info.desc1} </td>
                              	<td>${info.isbn} </td>
                         
-                             	<td>   <a class="btn btn-xs btn-success btn-outline" href="${ctx}/books/add?type=dangdang&id=${info.id}"><i class="fa fa-edit"></i> 采购</a></td>
+                             	<td>   <a class="btn btn-xs btn-success btn-outline" href="${ctx}/books/add?origin=dangdang&id=${info.id}"><i class="fa fa-edit"></i> 采购</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -114,98 +114,13 @@
                 .val('')
                 .removeAttr('checked')
                 .removeAttr('selected');
-            $('#searchForm').attr('action',"${ctx}/factor/list");
+            $('#searchForm').attr('action',"${ctx}/book/dangdang");
             $('#searchForm').submit();
         });
 
     });
 
-    function deleteFun(id) {
-        top.$.jBox.confirm("确定删除吗？","系统提示",function(v, h,f) {
-            if (v == "ok"){
-                $.ajax({
-                    url: "${ctx}/factor/delete?ran="+Math.random(),
-                    type: "post",
-                    data: {"id":id},
-                    dataType:"json",
-                    success:function(data){
-                        if(data.success){
-                            top.$.jBox.success("因子分析删除成功！！", "系统提示");
-                            $('#search').trigger("click");
-                        } else {
-                            top.$.jBox.error("删除失败！！", "系统提示");
-                            return false;
-                        }
-                    },
-                    error : function(XMLHttpRequest, textStatus, errorThrown) {
-                        top.$.jBox.error("系统内部错误！！", "系统提示");
-                    }
-                });
-            }
-        })
-    }
-    //停用、启用
-    function updateStatus(id, status) {
-        var msg = "确定启用吗？";
-        if (status === '2') {
-            msg = "确定停用吗？"
-        }
-        top.$.jBox.confirm(msg,"系统提示",function(v, h,f) {
-            if (v == "ok"){
-                $.ajax({
-                    url: "${ctx}/factor/updateStatus?ran="+Math.random(),
-                    type: "post",
-                    data: {"id":id, "status":status},
-                    dataType:"json",
-                    success:function(data){
-                        if(data.success){
-                            top.$.jBox.success("状态修改成功！！", "系统提示");
-                            $('#search').trigger("click");
-                        } else {
-                            top.$.jBox.error("状态修改失败！！", "系统提示");
-                            return false;
-                        }
-                    },
-                    error : function(XMLHttpRequest, textStatus, errorThrown) {
-                        top.$.jBox.error("系统内部错误！！", "系统提示");
-                    }
-                });
-            }
-        })
-    }
-    //运算
-    function calculate(id) {
-        top.$.jBox.confirm("确定运算吗？","系统提示",function(v, h,f) {
-            if (v == "ok"){
-                $.ajax({
-                    url: "${ctx}/factor/calculate?ran="+Math.random(),
-                    type: "post",
-                    data: {"id":id},
-                    dataType:"json",
-                    success:function(data){
-                        if(data.success){
-                            top.$.jBox.success(data.msg, "系统提示");
-                            $('#search').trigger("click");
-                        } else {
-                            top.$.jBox.error("模型运算启动失败！！", "系统提示");
-                            return false;
-                        }
-                    },
-                    error : function(XMLHttpRequest, textStatus, errorThrown) {
-                        top.$.jBox.error("系统内部错误！！", "系统提示");
-                    }
-                });
-            }
-        })
-    }
-
-    function expResult(id) {
-        top.$.jBox.confirm("确定导出运算结果吗？","系统提示",function(v, h,f) {
-            if (v == "ok"){
-                window.open("${ctx}/modelinfo/getFile?id="+id, '_blank');
-            }
-        })
-    }
+    
     //分页
     function page(n,s){
         if(n) $("#pageNo").val(n);

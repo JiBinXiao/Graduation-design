@@ -54,6 +54,8 @@
                         <th>数量</th>
                         <th>总金额</th>
                         <th>收货人</th>
+                        <th>创建时间</th>
+                         <th>来源</th>
                           <th>操作</th>
                     </tr>
                     </thead>
@@ -64,10 +66,12 @@
                         <c:forEach items="${page.list}" var="info" varStatus="vs">
                             <tr>
                                 <td>${vs.index+1}</td>
-                                <td>${info.price} </td>
+                                <td>${info.name} </td>
                                  <td>${info.num} </td>
                                 <td>${info.price} </td>
                                 <td>${info.receivingPerson}</td>
+                                <td>${info.createdate}</td>
+                                 <td>${info.origin}</td>
                                 <td>
                                     <a class="btn btn-xs btn-success btn-outline" href="${ctx}/company_info/detail?id=${info.id}" ><i class="fa fa-edit"></i> 查看详情</a>
                                    <a class="btn btn-xs btn-success btn-outline" href="${ctx}/company_info/gotoupdate?id=${info.id}" ><i class="fa fa-edit"></i> 修改</a>

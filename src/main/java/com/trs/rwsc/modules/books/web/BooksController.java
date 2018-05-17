@@ -8,8 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.trs.rwsc.modules.book.entity.DangDang_Book;
-import com.trs.rwsc.modules.book.service.DangDang_BookService;
+import com.trs.rwsc.modules.book.entity.DB_DangDang;
+import com.trs.rwsc.modules.book.entity.DB_JingDong;
+import com.trs.rwsc.modules.book.service.DB_DangDangService;
+import com.trs.rwsc.modules.book.service.DB_JingDongService;
 import com.trs.rwsc.modules.books.entity.Books;
 import com.trs.rwsc.modules.books.service.*;
 
@@ -21,18 +23,21 @@ public class BooksController {
 	private BooksService booksService;
 	
 	@Autowired
-	private DangDang_BookService dangDang_BookService;
+	private DB_DangDangService db_DangDangService;
+	
+	@Autowired
+	private DB_JingDongService db_JingDongService;
 
 	@RequestMapping(value="add")
 	public String add(HttpServletRequest request, HttpServletResponse response, Model model) {
-		String type=request.getParameter("type");
+		String origin=request.getParameter("origin");
 		String id=request.getParameter("id");
 	
 		Books books=new Books();
-		if( "dangdang".equals(type) ){
-			DangDang_Book dangDang_Book= dangDang_BookService.get(Integer.parseInt(id));
+		if( "dangdang".equals(origin) ){
+			DB_DangDang dangDang_Book= db_DangDangService.get(Integer.parseInt(id));
 			if(dangDang_Book !=null ) {
-				System.out.println(dangDang_Book);
+				
 				books.setName(dangDang_Book.getTitle());
 				books.setAuthor(dangDang_Book.getAuthor());
 				books.setDec1(dangDang_Book.getDesc1());
@@ -48,6 +53,21 @@ public class BooksController {
 			}
 			
 		}
+		if( "jingdong".equals(origin)) {
+			DB_JingDong db_JingDong=db_JingDongService.get(Integer.parseInt(id));
+			if(db_JingDong != null) {
+				books.setName(db_JingDong.getTitle());
+				books.setPublish(db_JingDong.getPublish());
+				books.setIsbn(db_JingDong.getIsbn());
+				books.setLinkurl(db_JingDong.getLink());
+				String price=db_JingDong.getPrnow();
+				
+				price=price.substring(1);
+				books.setPrice(price);
+				books.setOrigin("京东网");
+			}
+		}
+		
 		Books newbooks=booksService.get(books.getName());
 		if(newbooks==null)
 			booksService.add(books);

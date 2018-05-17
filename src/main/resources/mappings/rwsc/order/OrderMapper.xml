@@ -3,6 +3,7 @@
 <mapper namespace="com.trs.rwsc.modules.order.dao.OrderMapper" >
   <resultMap id="BaseResultMap" type="com.trs.rwsc.modules.order.entity.Order" >
     <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="num" property="num" jdbcType="INTEGER" />
     <result column="origin" property="origin" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DOUBLE" />
@@ -16,7 +17,7 @@
     <result column="supplier_id" property="supplierId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, num, origin, price, st, createdate, receiving_unit, receiving_person,receiving_address, receiving_phone, 
+    id, name,num, origin, price,  receiving_unit, receiving_person,receiving_address, receiving_phone, st, createdate,
     book_id, supplier_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -29,21 +30,15 @@
     delete from orders
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.trs.rwsc.modules.order.entity.Order" >
-    insert into orders (id, num, origin, 
-      price, st, createdate, 
-      receiving_unit, receiving_person, receiving_phone, 
-      book_id, supplier_id)
-    values (#{id,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, #{origin,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DOUBLE}, #{st,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, 
-      #{receivingUnit,jdbcType=VARCHAR}, #{receivingPerson,jdbcType=VARCHAR}, #{receivingPhone,jdbcType=VARCHAR}, 
-      #{bookId,jdbcType=INTEGER}, #{supplierId,jdbcType=INTEGER})
-  </insert>
+ 
   <insert id="insertSelective" parameterType="com.trs.rwsc.modules.order.entity.Order" >
     insert into orders
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+       <if test="name != null" >
+        name,
       </if>
       <if test="num != null" >
         num,
@@ -83,6 +78,9 @@
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
+       <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
       <if test="num != null" >
         #{num,jdbcType=INTEGER},
       </if>
@@ -121,6 +119,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.trs.rwsc.modules.order.entity.Order" >
     update orders
     <set >
+       <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
       <if test="num != null" >
         num = #{num,jdbcType=INTEGER},
       </if>

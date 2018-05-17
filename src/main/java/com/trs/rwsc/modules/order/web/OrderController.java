@@ -29,11 +29,13 @@ public class OrderController {
 	@RequestMapping(value = "add")
 	@ResponseBody
 	public String add(Order order,Model model ) {
+			
+			
 			order.setCreatedate(new Date());
 			order.setPrice(order.getNum()*order.getPrice());
 			order.setSt(1);
 			order.setSupplierId(1);
-		     int ret=orderService.add(order);
+		    int ret=orderService.add(order);
 	  
 	    	String msg="保存失败";
 	        if(ret==1){

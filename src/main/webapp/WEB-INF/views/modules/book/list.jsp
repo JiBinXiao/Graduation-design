@@ -36,9 +36,7 @@
                         <input type="text" placeholder="请输入书籍名称" name="modelname" value="${modelinfo.modelname}" class="form-control">
                     </div>
                 
-                    <a class="btn btn-sm btn-warning  m-l-sm pull-right" href="${ctx}/book/dangdang"><i class="fa fa-plus"></i> 当当</a>
-                    <a  class="btn btn-sm  btn-success btn-outline m-l-sm pull-right" href="${ctx}/book/jingdong"><i class="fa fa-refresh"></i> 京东</a>
-                    <a href="#" class="btn btn-success btn-sm m-l-md pull-right"  href="${ctx}/book/yamaxun"><i class="fa fa-search"></i> 亚马逊</a>
+                  
                 </form>
             </blockquote>
         </div>
@@ -69,32 +67,32 @@
                             </tr>
                         </c:forEach>
                          <tr>
-                                <td><a href="${ctx}/book/dangdang?word=python"> python</a></td>
-                                <td>python </td>
+                                <td><a href="${ctx}/book/dangdang?type=python"> python</a></td>
+                                <td><a href="${ctx}/book/dangdang?type=python">python </a></td>
 
                          </tr>
                          <tr>
-                               <td> <a href="${ctx}/book/dangdang?word=java"> java</a></td>
+                               <td> <a href="${ctx}/book/dangdang?type=java"> java</a></td>
                                <td>爬虫 </td>
 
                         </tr>
                             <tr>
-                                <td><a href="${ctx}/book/dangdang?word=python"> java</a></td>
+                                <td><a href="${ctx}/book/dangdang?type=python"> java</a></td>
                                 <td>英语 </td>
 
                          </tr>
                              <tr>
-                                <td><a href="${ctx}/book/dangdang?word=python"> html</a></td>
+                                <td><a href="${ctx}/book/dangdang?type=python"> html</a></td>
                                 <td>c </td>
 
                          </tr>
                              <tr>
-                                <td><a href="${ctx}/book/dangdang?word=python"> 高数</a></td>
+                                <td><a href="${ctx}/book/dangdang?type=python"> 高数</a></td>
                                 <td>信息系统分析 </td>
 
                          </tr>
                              <tr>
-                                <td><a href="${ctx}/book/dangdang?word=python"> python</a></td>
+                                <td><a href="${ctx}/book/dangdang?type=python"> python</a></td>
                                 <td>考研 </td>
 
                          </tr>
