@@ -1,5 +1,7 @@
 package com.trs.rwsc.modules.order.dao;
 
+import java.util.List;
+
 import com.trs.rwsc.common.persistence.CrudDao;
 import com.trs.rwsc.common.persistence.annotation.MyBatisDao;
 import com.trs.rwsc.modules.order.entity.Order;
@@ -18,4 +20,8 @@ public interface OrderMapper extends CrudDao<Order>{
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+	List<Order> findDelList();
+
+	List<Order> findConfirmList();
 }

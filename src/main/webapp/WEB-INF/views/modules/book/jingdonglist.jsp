@@ -28,9 +28,10 @@
     <div class="row">
         <div class="col-xs-12">
             <blockquote class="text-primary gray-bg-high"><i class="fa fa-codepen text-primary"></i>采购列表——京东
-                <form id="searchForm" action="${ctx}/factor/list" method="post" class="form-inline m-t-sm">
+                <form id="searchForm" action="${ctx}/book/jingdong" method="post" class="form-inline m-t-sm">
                     <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
                     <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
+                    <input  name="type" type="hidden" value="${type}"/>
                     <div class="form-group">
                         <label  class="control-label">书籍名称:</label>
                         <input type="text" placeholder="请输入书籍名称" name="modelname" value="${modelinfo.modelname}" class="form-control">

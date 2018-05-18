@@ -28,7 +28,7 @@
     <div class="row">
         <div class="col-xs-12">
             <blockquote class="text-primary gray-bg-high"><i class="fa fa-codepen text-primary"></i> 供应商列表
-                <form id="searchForm" action="${ctx}/supplier/search" method="post" class="form-inline m-t-sm">
+                <form id="searchForm" action="${ctx}/supplier/list" method="post" class="form-inline m-t-sm">
                     <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
                     <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
                     <div class="form-group">

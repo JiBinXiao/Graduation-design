@@ -28,18 +28,17 @@
     <div class="row">
         <div class="col-xs-12">
             <blockquote class="text-primary gray-bg-high"><i class="fa fa-codepen text-primary"></i> 订单管理
-                <form id="searchForm" action="${ctx}/company_info/seachbyName" method="post" class="form-inline m-t-sm">
+                <form id="searchForm" action="${ctx}/supplier/list" method="post" class="form-inline m-t-sm">
                     <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
                     <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
                     <div class="form-group">
                         <label  class="control-label">订单编号:</label>
-                        <input type="text" placeholder="请输入订单编号" name="custCfname" value="${company_Info.custCfname}" class="form-control">
+                        <input type="text" placeholder="请输入订单编号" name="custCfname" value="${orders.custCfname}" class="form-control">
                     </div>
-                  
-                    <a class="btn btn-sm btn-warning  m-l-sm pull-right"  href="${ctx}/company_info/gotoadd" ><i class="fa fa-plus"></i> 新增</a>
                     <a id="resetBtn" class="btn btn-sm  btn-success btn-outline m-l-sm pull-right"><i class="fa fa-refresh"></i> 重置</a>
                     <a href="#" class="btn btn-success btn-sm m-l-md pull-right" id="search"><i class="fa fa-search"></i> 查询</a>
-                     <a href="${ctx}/company_info/delList" class="btn btn-success btn-sm m-l-md pull-right" id="search"><i class="fa fa-search"></i> 回收站</a>
+                     <a href="${ctx}/orders/dellist" class="btn btn-success btn-sm m-l-md pull-right" id="search"><i class="fa fa-search"></i> 回收站</a>
+                     <a href="${ctx}/orders/confirmlist" class="btn btn-success btn-sm m-l-md pull-right" id="search"><i class="fa fa-search"></i> 已收货列表</a>
                 </form>
             </blockquote>
         </div>
@@ -56,6 +55,7 @@
                         <th>收货人</th>
                         <th>创建时间</th>
                          <th>来源</th>
+                           <th>状态</th>
                           <th>操作</th>
                     </tr>
                     </thead>
@@ -72,10 +72,19 @@
                                 <td>${info.receivingPerson}</td>
                                 <td>${info.createdate}</td>
                                  <td>${info.origin}</td>
+                                 <td>   
+		                         <c:choose>
+		                         	<c:when test="${info.st eq 1 }"> 待收货</c:when>
+		                         	<c:when test="${info.st eq -1 }"> 已删除</c:when>
+		                         	<c:when test="${info.st eq 2 }"> <span style='color:red'>已收货</span></c:when>
+		                         </c:choose>
+		                        	
+		                     	 </td>
                                 <td>
-                                    <a class="btn btn-xs btn-success btn-outline" href="${ctx}/company_info/detail?id=${info.id}" ><i class="fa fa-edit"></i> 查看详情</a>
-                                   <a class="btn btn-xs btn-success btn-outline" href="${ctx}/company_info/gotoupdate?id=${info.id}" ><i class="fa fa-edit"></i> 修改</a>
-                                   <a class="btn btn-xs btn-success btn-outline" href="${ctx}/company_info/delete?id=${info.id}" onclick="return confirm('确定删除当前数据?');"><i class="fa fa-edit"></i> 删除</a>
+                                 <a class="btn btn-xs btn-success btn-outline" href="${ctx}/orders/confirm?id=${info.id}" onclick="return confirm('确定收货?');"><i class="fa fa-edit"></i> 确认收货</a>
+                                    <a class="btn btn-xs btn-success btn-outline" href="${ctx}/orders/detail?id=${info.id}" ><i class="fa fa-edit"></i> 查看详情</a>
+                                   <a class="btn btn-xs btn-success btn-outline" href="${ctx}/orders/gotoupdate?id=${info.id}" ><i class="fa fa-edit"></i> 修改</a>
+                                   <a class="btn btn-xs btn-success btn-outline" href="${ctx}/orders/delete?id=${info.id}" onclick="return confirm('确定删除当前数据?');"><i class="fa fa-edit"></i> 删除</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -121,7 +130,7 @@
                 .val('')
                 .removeAttr('checked')
                 .removeAttr('selected');
-            $('#searchForm').attr('action',"${ctx}/company_info/list");
+            $('#searchForm').attr('action',"${ctx}/orders/list");
             $('#searchForm').submit();
         });
 

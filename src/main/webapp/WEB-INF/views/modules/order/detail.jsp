@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="renderer" content="webkit">
-    <title>企业详情</title>
+    <title>订单详情</title>
     <link rel="stylesheet" href="${ctxStatic}/css/bootstrap.min.css" title="" />
     <link rel="stylesheet" type="text/css" href="${ctxStatic}/css/plugins/datapicker/bootstrap-datetimepicker.css" />
     <!--<link rel="stylesheet" type="text/css" href="css/animate.css" />-->
@@ -35,56 +35,85 @@
                      
                       <tr>
                         <td>序号</td>
-                        <td>${company_Info.custId}</td>
+                        <td>${order.id}</td>
                   	  </tr>
                 	  <tr>
-                        <td>全称</td>
+                        <td>书名</td>
                      	 <td>  
-                     	     <c:choose>
-                     	 	<c:when test="${company_Info.custCfname eq '-1'}"></c:when>
-                     	 	<c:otherwise>${company_Info.custCfname}</c:otherwise>
-                     	 	</c:choose>
+                     	 
+                     	${order.name}
+                     	 
+                     	 </td>
+                  	  </tr>
+                     <tr>
+                       <td>来源</td>
+                      
+                         <td>   
+                        
+                     	 ${order.origin}
                      	 </td>
                   	  </tr>
                   	  <tr>
-                        <td>简称</td>
+                        <td>数量</td>
                         <td>   
-                        	<c:choose>
-                     	 	<c:when test="${company_Info.custCsname eq '-1'}"></c:when>
-                     	 	<c:otherwise>${company_Info.custCsname}</c:otherwise>
-                     	 	</c:choose>
+                        
+                     	 	${order.num}
+                     	 
                      	 </td>
                   	  </tr>
-                  	    <tr>
-                       <td>英文名</td>
-                      
-                         <td>   
-                        	<c:choose>
-                     	 	<c:when test="${company_Info.custEfname eq '-1'}"></c:when>
-                     	 	<c:otherwise>${company_Info.custEfname}</c:otherwise>
-                     	 	</c:choose>
-                     	 </td>
-                  	  </tr>
+                 
                   	   <tr>
-                        <td>英文简称</td>
+                        <td>价格</td>
               
                          <td>   
-                        	<c:choose>
-                     	 	<c:when test="${company_Info.custEsname eq '-1'}"></c:when>
-                     	 	<c:otherwise>${company_Info.custEsname}</c:otherwise>
-                     	 	</c:choose>
+                        ${order.price}元
                      	 </td>
                   	  </tr>
                   	   <tr>
-                        <td>省份</td>
+                        <td>状态</td>
                          <td>   
-                        	<c:choose>
-                     	 	<c:when test="${company_Info.provinceName eq '-1'}"></c:when>
-                     	 	<c:otherwise>${company_Info.provinceName}</c:otherwise>
-                     	 	</c:choose>
+                         <c:choose>
+                         	<c:when test="${order.st eq 1 }"> 待收货</c:when>
+                         	<c:when test="${order.st eq -1 }"> 已删除</c:when>
+                         	<c:when test="${order.st eq 2 }"> <span style='color:red'>已收货</span></c:when>
+                         </c:choose>
+                        	
                      	 </td>
                   	  </tr>
-                  	   
+                  	  	   <tr>
+                        <td>创建日期</td>
+                         <td>   
+                        	${order.createdate}
+                     	 </td>
+                  	  </tr>
+                  	  	   <tr>
+                        <td>收货单位</td>
+                         <td>   
+                        	${order.receivingUnit}
+                     	 </td>
+                  	  </tr>
+                  	  	   <tr>
+                        <td>收货人</td>
+                         <td>   
+                        	${order.receivingPerson}
+                     	 </td>
+                  	  </tr>
+                  	  	   <tr>
+                        <td>收货联系方式</td>
+                         <td>   
+                        	${order.receivingPhone}
+                     	 </td>
+                  	  </tr>	   <tr>
+                        <td>收货地址</td>
+                         <td>   
+                        	${order.receivingAddress}
+                     	 </td>
+                  	  </tr>
+                  	 <td>供应商</td>
+                         <td>   
+                        	${order.receivingAddress}
+                     	 </td>
+                  	  </tr>
             
                      
                     </tbody>

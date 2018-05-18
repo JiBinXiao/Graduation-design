@@ -30,6 +30,8 @@
     delete from orders
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  
+  
  
   <insert id="insertSelective" parameterType="com.trs.rwsc.modules.order.entity.Order" >
     insert into orders
@@ -158,16 +160,41 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <delete id="deleteData" parameterType="com.trs.rwsc.modules.order.entity.Order">
+      delete from orders where id=#{id}
+  </delete>
     <!-- 查询全部企业数目 -->
 	<select id="findAllCount" resultType="long">
 		SELECT COUNT(1) FROM orders 
 	</select>
     
-  <!-- 查询状态为 1的正常数据 -->
+  <!-- 查询状态为 所有数据 -->
   	<select id="findList" resultType="com.trs.rwsc.modules.order.entity.Order">
 		SELECT
 			<include refid="Base_Column_List"/>
 		FROM orders 
+		
+	</select>
+	
+   <select id="findDelList" resultType="com.trs.rwsc.modules.order.entity.Order">
+		SELECT
+			<include refid="Base_Column_List"/>
+		FROM orders where st=-1
+		
+	</select>
+	
+	  <select id="findConfirmList" resultType="com.trs.rwsc.modules.order.entity.Order">
+		SELECT
+			<include refid="Base_Column_List"/>
+		FROM orders where st=2
+		
+	</select>
+	
+	 <select id="get" parameterType="int" resultType="com.trs.rwsc.modules.order.entity.Order">
+		SELECT
+			<include refid="Base_Column_List"/>
+		FROM orders where id=#{id}
 		
 	</select>
 </mapper>

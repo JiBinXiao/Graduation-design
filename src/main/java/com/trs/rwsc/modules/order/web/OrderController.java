@@ -45,14 +45,163 @@ public class OrderController {
 		}
 	
 	
-	 @RequestMapping(value = "list")
+	/**
+	 * 查询所有订单
+	 * @param order
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "list")
     public String list(Order order,HttpServletRequest request, HttpServletResponse response, Model model) {
 
+		
+		
         Page<Order> page = orderService.findPage(new Page<Order>(request, response), order);
 
         model.addAttribute("page", page);
         
         return "modules/order/list";
     }
+	
+	/**
+	 * 根据id查询
+	 * @param order
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "detail")
+    public String detailbyid(Order order,HttpServletRequest request, HttpServletResponse response, Model model) {
+
+		order=orderService.get(order.getId());
+	 model.addAttribute("order", order);
+        return "modules/order/detail";
+    }
+	
+	
+	/**
+	 * 查询回收站订单
+	 * @param order
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "dellist")
+    public String dellist(Order order,HttpServletRequest request, HttpServletResponse response, Model model) {
+
+		
+		
+        Page<Order> page = orderService.findDelPage(new Page<Order>(request, response), order);
+
+        model.addAttribute("page", page);
+        
+        return "modules/order/dellist";
+    }
+	
+	/**
+	 * 查询回收站订单
+	 * @param order
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "confirmlist")
+    public String confirmlist(Order order,HttpServletRequest request, HttpServletResponse response, Model model) {
+
+		
+		
+        Page<Order> page = orderService.findConfirmPage(new Page<Order>(request, response), order);
+
+        model.addAttribute("page", page);
+        
+        return "modules/order/confirmlist";
+    }
+	
+	
+	/**
+	 * 逻辑删除 修改状态字段为 -1
+	 * @param order
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "delete")
+	public String delete(Order order,HttpServletRequest request, HttpServletResponse response, Model model) {
+		order.setSt(-1);
+		int t=orderService.update(order);
+		
+	    Page<Order> page = orderService.findPage(new Page<Order>(request, response), order);
+
+        model.addAttribute("page", page);
+        
+        return "modules/order/list";
+	}
+	
+	/**
+	 * 确认收货 修改st为 2
+	 * @param order
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "confirm")
+	public String confirm(Order order,HttpServletRequest request, HttpServletResponse response, Model model) {
+		order.setSt(2);
+		int t=orderService.update(order);
+		
+	    Page<Order> page = orderService.findPage(new Page<Order>(request, response), order);
+
+        model.addAttribute("page", page);
+        
+        return "modules/order/list";
+	}
+	
+	/**
+	 * 恢复数据 修改st为 1
+	 * @param order
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "recover")
+	public String recover(Order order,HttpServletRequest request, HttpServletResponse response, Model model) {
+		order.setSt(1);
+		int t=orderService.update(order);
+		
+	    Page<Order> page = orderService.findPage(new Page<Order>(request, response), order);
+
+        model.addAttribute("page", page);
+        
+        return "modules/order/dellist";
+	}
+	
+	
+	/**
+	 * 物理删除 从数据库中清除
+	 * @param order
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "deleteData")
+	public String deleteData(Order order,HttpServletRequest request, HttpServletResponse response, Model model) {
+		orderService.deleteData(order);
+		
+	    Page<Order> page = orderService.findPage(new Page<Order>(request, response), order);
+
+        model.addAttribute("page", page);
+        
+        return "modules/order/dellist";
+	}
+	
     
 }
