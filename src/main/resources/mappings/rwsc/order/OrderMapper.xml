@@ -8,7 +8,7 @@
     <result column="origin" property="origin" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DOUBLE" />
     <result column="st" property="st" jdbcType="INTEGER" />
-    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="createdate" property="createdate" jdbcType="DATE" />
     <result column="receiving_unit" property="receivingUnit" jdbcType="VARCHAR" />
     <result column="receiving_person" property="receivingPerson" jdbcType="VARCHAR" />
     <result column="receiving_address" property="receivingAddress" jdbcType="VARCHAR" />

@@ -4,6 +4,8 @@ import java.util.Date;
 
 import com.trs.rwsc.common.persistence.DataEntity;
 import com.trs.rwsc.common.persistence.Page;
+import com.trs.rwsc.modules.books.entity.Books;
+import com.trs.rwsc.modules.supplier.entity.Supplier;
 
 public class Order extends DataEntity<Order>{
 
@@ -28,10 +30,8 @@ public class Order extends DataEntity<Order>{
 
     private String receivingPhone;
 
-    private Integer bookId;
-
-    private Integer supplierId;
-
+    private String bookId;
+    private String supplierId;
 
 
     public String getName() {
@@ -118,31 +118,28 @@ public class Order extends DataEntity<Order>{
         this.receivingPhone = receivingPhone == null ? null : receivingPhone.trim();
     }
 
-    public Integer getBookId() {
-        return bookId;
-    }
+	public String getBookId() {
+		return bookId;
+	}
 
-    public void setBookId(Integer bookId) {
-        this.bookId = bookId;
-    }
+	public void setBookId(String bookId) {
+		this.bookId = bookId;
+	}
 
-    public Integer getSupplierId() {
-        return supplierId;
-    }
+	public String getSupplierId() {
+		return supplierId;
+	}
 
-    public void setSupplierId(Integer supplierId) {
-        this.supplierId = supplierId;
-    }
+	public void setSupplierId(String supplierId) {
+		this.supplierId = supplierId;
+	}
+
+	
     
 
 
-	@Override
-	public String toString() {
-		return "Order [id=" + id + ", num=" + num + ", origin=" + origin + ", price=" + price + ", st=" + st
-				+ ", createdate=" + createdate + ", receivingUnit=" + receivingUnit + ", receivingPerson="
-				+ receivingPerson + ", receivingAddress=" + receivingAddress + ", receivingPhone=" + receivingPhone
-				+ ", bookId=" + bookId + ", supplierId=" + supplierId + "]";
-	}
+	
+
     
     
 }

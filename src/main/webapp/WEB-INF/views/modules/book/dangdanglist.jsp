@@ -27,7 +27,7 @@
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-xs-12">
-            <blockquote class="text-primary gray-bg-high"><i class="fa fa-codepen text-primary"></i>采购列表——当当
+            <blockquote class="text-primary gray-bg-high"><i class="fa fa-codepen text-primary"></i>采购列表——当当（${type}）
                 <form id="searchForm" action="${ctx}/book/dangdang" method="post" class="form-inline m-t-sm">
                     <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
                     <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
@@ -36,10 +36,10 @@
                         <label  class="control-label">书籍名称:</label>
                         <input type="text" placeholder="请输入书籍名称" name="modelname" value="${modelinfo.modelname}" class="form-control">
                     </div>
-                
-                    <a class="btn btn-sm btn-warning  m-l-sm pull-right" href="${ctx}/book/dangdang?type=${type}"><i class="fa fa-plus"></i> 当当</a>
+                  <a class="btn btn-sm btn-warning  m-l-sm pull-right" href="javascript:void(0)" onclick="onCrawl('${type}')"><i class="fa fa-plus"></i> 爬取</a>
+
                     <a  class="btn btn-sm  btn-success btn-outline m-l-sm pull-right" href="${ctx}/book/jingdong?type=${type}"><i class="fa fa-refresh"></i> 京东</a>
-                    <a href="#" class="btn btn-success btn-sm m-l-md pull-right"  href="${ctx}/book/yamaxun?type=${type}"><i class="fa fa-search"></i> 亚马逊</a>
+        
                 </form>
             </blockquote>
         </div>
@@ -56,12 +56,13 @@
                         <th>出版社</th>
                         <th>描述</th>
                          <th>ISBN号</th>
+                          <th>评论数</th>
                          <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
                         <c:if test="${empty page.list }">
-                            <tr><td colspan="6" class="text-center">没有符合条件的数据</td></tr>
+                            <tr><td colspan="8" class="text-center">没有符合条件的数据</td></tr>
                         </c:if>
                         <c:forEach items="${page.list}" var="info" varStatus="vs">
                             <tr>
@@ -73,6 +74,7 @@
                                 <td>${info.publish} </td>
                         	    <td>${info.desc1} </td>
                              	<td>${info.isbn} </td>
+                             	<td>${info.reviewCount} </td>
                         
                              	<td>   <a class="btn btn-xs btn-success btn-outline" href="${ctx}/books/add?origin=dangdang&id=${info.id}"><i class="fa fa-edit"></i> 采购</a></td>
                             </tr>
@@ -120,7 +122,36 @@
         });
 
     });
-
+  //运算
+    function onCrawl(type) {
+    	
+        top.$.jBox.confirm("确定爬取吗？","系统提示",function(v, h,f) {
+            if (v == "ok"){
+                $.ajax({
+                    url: "${ctx}/book/crwal",
+                    type: "post",
+                    data: {"keyword":type,"type":"dangdang"},
+                    dataType:"json",
+                    success:function(data){
+                        if(data.success){
+                        	 top.$.jBox.success(data.msg,'系统提示',{ closed: function () {
+                                 location.href = "${ctx}/book/dangdang?type="+type;
+                             }
+                             });
+                            
+                        } else {
+                            top.$.jBox.error("爬取失败！！", "系统提示");
+                            
+                            return false;
+                        }
+                    },
+                    error : function(XMLHttpRequest, textStatus, errorThrown) {
+                        top.$.jBox.error("系统内部错误！！", "系统提示");
+                    }
+                });
+            }
+        })
+    }
     
     //分页
     function page(n,s){

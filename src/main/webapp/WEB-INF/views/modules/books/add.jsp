@@ -171,6 +171,17 @@
                                                 	  <input id="origin"  name= "origin" type="hidden"  class="form-control" value="${books.origin }"/>
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                             <label class="control-label col-md-3"><span class="red_text">*</span> 供应商</label>
+                                               <div class="col-md-7">
+												    <select class="form-control" name = 'supplierid'  id='supplierid'>
+												        <c:forEach items="${suppliers}" var="supplier" >
+												     		 <option  value='${ supplier.id}'>${ supplier.sname}</option>
+												    	</c:forEach>
+												    </select>
+												   
+												  </div>
+												  </div>
                                               <div class="form-group">
                                                 <label class="control-label col-md-3"><span class="red_text">*</span> 收货单位</label>
                                                 <div class="col-md-7">
@@ -239,6 +250,12 @@
                                                 <label class="control-label col-md-3"> 数量</label>
                                                 <div class="col-md-7">
                                                   <span id="num2"></span>
+                                                </div>
+                                            </div>
+                                              <div class="form-group">
+                                                <label class="control-label col-md-3"> 供应商</label>
+                                                <div class="col-md-7">
+                                                  <span id="supplier"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -343,6 +360,7 @@
          var receivingPerson = $("#receivingPerson").val();
          var receivingAddress = $("#receivingAddress").val();
          var receivingPhone = $("#receivingPhone").val();
+         var supplierid = $("#supplierid").find("option:selected").text()
 	
   	
          $('#num2').html(num);
@@ -352,6 +370,7 @@
     	 $('#person').html(receivingPerson);
     	 $('#unit').html(receivingUnit);
     	 $('#phone').html(receivingPhone);
+    	 $('#supplier').html(supplierid);
    
     	
     });

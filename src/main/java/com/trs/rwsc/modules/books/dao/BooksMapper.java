@@ -18,4 +18,6 @@ public interface BooksMapper {
     int updateByPrimaryKey(Books record);
 
 	Books get(String name);
+	
+	Books getById(int id);
 }

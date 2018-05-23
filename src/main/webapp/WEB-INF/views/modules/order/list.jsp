@@ -83,7 +83,7 @@
                                 <td>
                                  <a class="btn btn-xs btn-success btn-outline" href="${ctx}/orders/confirm?id=${info.id}" onclick="return confirm('确定收货?');"><i class="fa fa-edit"></i> 确认收货</a>
                                     <a class="btn btn-xs btn-success btn-outline" href="${ctx}/orders/detail?id=${info.id}" ><i class="fa fa-edit"></i> 查看详情</a>
-                                   <a class="btn btn-xs btn-success btn-outline" href="${ctx}/orders/gotoupdate?id=${info.id}" ><i class="fa fa-edit"></i> 修改</a>
+                       
                                    <a class="btn btn-xs btn-success btn-outline" href="${ctx}/orders/delete?id=${info.id}" onclick="return confirm('确定删除当前数据?');"><i class="fa fa-edit"></i> 删除</a>
                                 </td>
                             </tr>

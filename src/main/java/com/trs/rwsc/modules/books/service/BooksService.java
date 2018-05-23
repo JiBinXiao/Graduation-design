@@ -26,4 +26,9 @@ public class BooksService {
 		// TODO Auto-generated method stub
 		return booksMapper.get(string);
 	}
+	
+	public Books getById(int id) {
+		// TODO Auto-generated method stub
+		return booksMapper.getById(id);
+	}
 }

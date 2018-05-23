@@ -9,7 +9,7 @@ import java.util.List;
 import com.trs.rwsc.common.persistence.CrudDao;
 import com.trs.rwsc.common.persistence.Page;
 import com.trs.rwsc.common.persistence.annotation.MyBatisDao;
-import com.trs.rwsc.modules.book.entity.DangDang_Book;
+
 import com.trs.rwsc.modules.supplier.entity.Supplier;
 
 
@@ -23,6 +23,8 @@ public interface SupplierDao extends CrudDao<Supplier> {
 	List<Supplier> findDelList( Supplier supplier);
 
 	int checkNameisUse(Supplier supplier);
+
+	List<Supplier> findList();
 	
 
 

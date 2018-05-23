@@ -111,7 +111,7 @@
                   	  </tr>
                   	 <td>供应商</td>
                          <td>   
-                        	${order.receivingAddress}
+                        	${supplier.sname}
                      	 </td>
                   	  </tr>
             

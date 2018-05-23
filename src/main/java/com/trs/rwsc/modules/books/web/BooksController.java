@@ -1,5 +1,9 @@
 package com.trs.rwsc.modules.books.web;
 
+
+
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,10 +18,15 @@ import com.trs.rwsc.modules.book.service.DB_DangDangService;
 import com.trs.rwsc.modules.book.service.DB_JingDongService;
 import com.trs.rwsc.modules.books.entity.Books;
 import com.trs.rwsc.modules.books.service.*;
+import com.trs.rwsc.modules.supplier.entity.Supplier;
+import com.trs.rwsc.modules.supplier.service.SupplierService;
 
 @Controller
 @RequestMapping(value = "${adminPath}/books/")
 public class BooksController {
+	
+	@Autowired
+	private SupplierService supplierService;
 	
 	@Autowired
 	private BooksService booksService;
@@ -72,8 +81,11 @@ public class BooksController {
 		if(newbooks==null)
 			booksService.add(books);
 		books=booksService.get(books.getName());
-		model.addAttribute("books",books);
+		 
 		
+		List<Supplier> suppliers= supplierService.findList();
+		model.addAttribute("books",books);
+		model.addAttribute("suppliers",suppliers);
 		
 		return "modules/books/add";
 	}

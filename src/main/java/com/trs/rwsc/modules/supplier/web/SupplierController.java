@@ -13,7 +13,7 @@ import com.trs.rwsc.common.persistence.Page;
 import com.trs.rwsc.common.utils.RtnResult;
 import com.trs.rwsc.common.web.BaseController;
 
-import com.trs.rwsc.modules.company.entity.Company_Info;
+
 import com.trs.rwsc.modules.supplier.entity.Supplier;
 import com.trs.rwsc.modules.supplier.service.SupplierService;
 

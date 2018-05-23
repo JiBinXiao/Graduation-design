@@ -1,6 +1,8 @@
 package com.trs.rwsc.modules.order.web;
 
+
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,9 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.trs.rwsc.common.persistence.Page;
 import com.trs.rwsc.common.utils.RtnResult;
+import com.trs.rwsc.modules.books.entity.Books;
+import com.trs.rwsc.modules.books.service.BooksService;
 import com.trs.rwsc.modules.order.entity.Order;
 import com.trs.rwsc.modules.order.service.OrderService;
 import com.trs.rwsc.modules.supplier.entity.Supplier;
+import com.trs.rwsc.modules.supplier.service.SupplierService;
 
 @Controller
 @RequestMapping(value = "${adminPath}/orders/")
@@ -26,15 +31,24 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
+	@Autowired
+	private BooksService booksService;
+	
+	@Autowired
+	private SupplierService supplierService;
+	
 	@RequestMapping(value = "add")
 	@ResponseBody
-	public String add(Order order,Model model ) {
+	public String add(Order order,HttpServletRequest request,Model model ) {
 			
-			
+			String supplierid = request.getParameter("supplierid");
+			String bookId=request.getParameter("bookId");
+		
 			order.setCreatedate(new Date());
 			order.setPrice(order.getNum()*order.getPrice());
 			order.setSt(1);
-			order.setSupplierId(1);
+			order.setSupplierId(supplierid);
+			order.setBookId(bookId);
 		    int ret=orderService.add(order);
 	  
 	    	String msg="保存失败";
@@ -60,6 +74,7 @@ public class OrderController {
 		
         Page<Order> page = orderService.findPage(new Page<Order>(request, response), order);
 
+
         model.addAttribute("page", page);
         
         return "modules/order/list";
@@ -77,7 +92,10 @@ public class OrderController {
     public String detailbyid(Order order,HttpServletRequest request, HttpServletResponse response, Model model) {
 
 		order=orderService.get(order.getId());
-	 model.addAttribute("order", order);
+		Supplier supplier=supplierService.get(Integer.parseInt(order.getSupplierId()));
+		model.addAttribute("order", order);
+		System.out.println(order.getCreatedate());
+		model.addAttribute("supplier",supplier);
         return "modules/order/detail";
     }
 	

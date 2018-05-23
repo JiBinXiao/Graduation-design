@@ -135,4 +135,8 @@
   <select id="get" parameterType="string" resultMap="BaseResultMap">
   	select * from books where name=#{name}
   </select>
+  
+    <select id="getById" parameterType="int" resultMap="BaseResultMap">
+  	select * from books where id=#{id}
+  </select>
 </mapper>

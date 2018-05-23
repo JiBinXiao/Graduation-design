@@ -31,10 +31,7 @@
                 <form id="searchForm" action="${ctx}/factor/list" method="post" class="form-inline m-t-sm">
                     <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
                     <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
-                    <div class="form-group">
-                        <label  class="control-label">书籍名称:</label>
-                        <input type="text" placeholder="请输入书籍名称" name="modelname" value="${modelinfo.modelname}" class="form-control">
-                    </div>
+                 
                 
                   
                 </form>
@@ -77,23 +74,23 @@
 
                         </tr>
                             <tr>
-                                <td><a href="${ctx}/book/dangdang?type=python"> java</a></td>
+                                <td><a href="${ctx}/book/dangdang?type=c"> c</a></td>
                                 <td>英语 </td>
 
                          </tr>
                              <tr>
-                                <td><a href="${ctx}/book/dangdang?type=python"> html</a></td>
+                                <td><a href="${ctx}/book/dangdang?type=javascript"> javascript</a></td>
                                 <td>c </td>
 
                          </tr>
                              <tr>
-                                <td><a href="${ctx}/book/dangdang?type=python"> 高数</a></td>
+                                <td><a href="${ctx}/book/dangdang?type=高数"> 高数</a></td>
                                 <td>信息系统分析 </td>
 
                          </tr>
                              <tr>
-                                <td><a href="${ctx}/book/dangdang?type=python"> python</a></td>
-                                <td>考研 </td>
+                                <td><a href="${ctx}/book/dangdang?type=网页编程"> 网页编程</a></td>
+                                <td><a href="${ctx}/book/dangdang?type=考研">考研 </a></td>
 
                          </tr>
                     </tbody>
