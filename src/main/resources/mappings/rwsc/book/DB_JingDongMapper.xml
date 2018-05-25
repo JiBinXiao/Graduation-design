@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.trs.rwsc.modules.book.dao.DB_JingDongMapper" >
+  <resultMap id="BaseResultMap" type="com.trs.rwsc.modules.book.entity.DB_JingDong" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="LONGVARCHAR" />
+    <result column="prNow" property="prnow" jdbcType="LONGVARCHAR" />
+    <result column="publish" property="publish" jdbcType="LONGVARCHAR" />
+    <result column="isbn" property="isbn" jdbcType="LONGVARCHAR" />
+    <result column="link" property="link" jdbcType="LONGVARCHAR" />
+    <result column="goodRateShow" property="goodRateShow" jdbcType="LONGVARCHAR" />
+    <result column="goodCountStr" property="goodCountStr" jdbcType="LONGVARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id,title,prNow,publish,isbn,link,goodRateShow,goodCountStr,createdate, type
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from db_jingdong
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+   <delete id="deleteByType"   parameterType="string" >	
+    	delete from db_jingdong where type = #{type}
+    </delete>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from db_jingdong
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+	<!-- 查询所有 -->
+	<select id="findList" parameterType="com.trs.rwsc.modules.book.entity.DB_JingDong" resultType="com.trs.rwsc.modules.book.entity.DB_JingDong">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM db_jingdong where type=#{type}
+	</select>
+	
+	<select id="get" parameterType="int" resultType="com.trs.rwsc.modules.book.entity.DB_JingDong">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM db_jingdong where id=#{id}
+	</select>
+	
+	<!-- 查询全部企业数目 -->
+	<select id="findAllCount" parameterType="com.trs.rwsc.modules.book.entity.DB_JingDong" resultType="long">
+		SELECT
+			COUNT(1)
+		FROM db_jingdong
+		<if test="type != null" >
+        where type=#{type}
+      </if>
+		
+	</select>
+</mapper>
