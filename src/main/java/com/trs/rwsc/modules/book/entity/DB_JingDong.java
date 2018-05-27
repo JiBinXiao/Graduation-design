@@ -22,10 +22,19 @@ public class DB_JingDong extends DataEntity<DB_JingDong>{
     private String goodCountStr;
 
 
-    private Date createdate;
 
     private String type;
+    private String sortType;
 
+
+
+    public String getSortType() {
+		return sortType;
+	}
+
+	public void setSortType(String sortType) {
+		this.sortType = sortType;
+	}
 
     
     public String getTitle() {
@@ -86,13 +95,6 @@ public class DB_JingDong extends DataEntity<DB_JingDong>{
         this.link = link == null ? null : link.trim();
     }
 
-    public Date getCreatedate() {
-        return createdate;
-    }
-
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
-    }
 
 	public String getType() {
 		return type;

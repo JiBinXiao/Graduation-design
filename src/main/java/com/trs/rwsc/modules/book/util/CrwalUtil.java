@@ -9,15 +9,15 @@ import java.util.regex.Pattern;
 public class CrwalUtil {
 	
 	
-	public int crwal(String type ,String keyword,String pythonpash, int sum) {
-		System.out.println(type+"\t"+keyword+"\t正在爬取");
+	public int crwal(String type ,String keyword,String sortType,String pythonpash, int sum) {
+		System.out.println(type+"\t"+keyword+"\t"+sortType+"\t正在爬取");
 		int re=0;
 		int result=0;
 		Pattern pattern = Pattern.compile("[0-9]+");
 		try {
 	   
 		File file = new File(pythonpash+"\\newSpider.py");		
-		String[] arguments = new String[] {"python", file.getAbsolutePath(), type, keyword,sum+""};
+		String[] arguments = new String[] {"python", file.getAbsolutePath(), type, keyword,sortType,sum+""};
 	
 	    Process process = Runtime.getRuntime().exec(arguments);
 	 
@@ -43,7 +43,7 @@ public class CrwalUtil {
 	
 	public static void main(String[] args) {
 		CrwalUtil crwalUtil=new CrwalUtil();
-		int sum=crwalUtil.crwal("dangdang","python","F:\\毕设\\graduationWorkplace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\rwsc\\static\\python",3);
+		int sum=crwalUtil.crwal("dangdang","python","F:\\毕设\\graduationWorkplace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\rwsc\\static\\python","综合",3);
 		System.out.println(sum);
 	}
 }

@@ -8,7 +8,8 @@
     <result column="origin" property="origin" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DOUBLE" />
     <result column="st" property="st" jdbcType="INTEGER" />
-    <result column="createdate" property="createdate" jdbcType="DATE" />
+    <result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="updateDate" property="updateDate" jdbcType="TIMESTAMP" />
     <result column="receiving_unit" property="receivingUnit" jdbcType="VARCHAR" />
     <result column="receiving_person" property="receivingPerson" jdbcType="VARCHAR" />
     <result column="receiving_address" property="receivingAddress" jdbcType="VARCHAR" />
@@ -17,7 +18,7 @@
     <result column="supplier_id" property="supplierId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name,num, origin, price,  receiving_unit, receiving_person,receiving_address, receiving_phone, st, createdate,
+    id, name,num, origin, price,  receiving_unit, receiving_person,receiving_address, receiving_phone, st, createDate,updateDate,
     book_id, supplier_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -54,8 +55,11 @@
       <if test="st != null" >
         st,
       </if>
-      <if test="createdate != null" >
-        createdate,
+      <if test="createDate != null" >
+        createDate,
+      </if>
+      <if test="updateDate != null" >
+        updateDate,
       </if>
       <if test="receivingUnit != null" >
         receiving_unit,
@@ -95,8 +99,11 @@
       <if test="st != null" >
         #{st,jdbcType=INTEGER},
       </if>
-      <if test="createdate != null" >
-        #{createdate,jdbcType=TIMESTAMP},
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+        <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
       </if>
       <if test="receivingUnit != null" >
         #{receivingUnit,jdbcType=VARCHAR},
@@ -136,8 +143,11 @@
       <if test="st != null" >
         st = #{st,jdbcType=INTEGER},
       </if>
-      <if test="createdate != null" >
-        createdate = #{createdate,jdbcType=TIMESTAMP},
+      <if test="createDate != null" >
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        updateDate = #{updateDate,jdbcType=TIMESTAMP},
       </if>
       <if test="receivingUnit != null" >
         receiving_unit = #{receivingUnit,jdbcType=VARCHAR},
@@ -188,6 +198,14 @@
 		SELECT
 			<include refid="Base_Column_List"/>
 		FROM orders where st=2
+		
+	</select>
+	
+		
+	  <select id="findNotList" resultType="com.trs.rwsc.modules.order.entity.Order">
+		SELECT
+			<include refid="Base_Column_List"/>
+		FROM orders where st=1
 		
 	</select>
 	

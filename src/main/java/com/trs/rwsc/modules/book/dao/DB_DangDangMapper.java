@@ -13,5 +13,5 @@ public interface DB_DangDangMapper extends CrudDao<DB_DangDang>{
     
     long findAllCount(DB_DangDang db_DangDang);
 
-	void deleteByType(String type);
+	void deleteByType(String type,String sortType);
 }

@@ -32,15 +32,17 @@
                     <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
                     <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
                     <div class="form-group">
-                        <label  class="control-label">供应商名称:</label>
-                        <input type="text" placeholder="请输入供应商名称" name="modelname" value="${supplier.sname}" class="form-control">
+                        <label  class="control-label">   &nbsp;</label>
+                      
                     </div>
                   
-                    <a class="btn btn-sm btn-warning  m-l-sm pull-right" href="${ctx}/supplier/gotoadd"><i class="fa fa-plus"></i> 新增</a>
-                    <a id="resetBtn" class="btn btn-sm  btn-success btn-outline m-l-sm pull-right"><i class="fa fa-refresh"></i> 重置</a>
-                    <a href="#" class="btn btn-success btn-sm m-l-md pull-right" id="search"><i class="fa fa-search"></i> 查询</a>
-                	<a href="${ctx}/supplier/dellist" class="btn btn-success btn-sm m-l-md pull-right" id="search"><i class="fa fa-search"></i> 回收站</a>
+                   
                 </form>
+                
+                 <a class="btn btn-sm btn-warning  m-l-sm pull-right" href="${ctx}/supplier/gotoadd"><i class="fa fa-plus"></i> 新增</a>
+
+                 
+                	<a href="${ctx}/supplier/dellist" class="btn btn-success btn-sm m-l-md pull-right" id="search"><i class="fa fa-search"></i> 回收站</a>
             </blockquote>
         </div>
         <div class="col-xs-12">
@@ -53,6 +55,7 @@
                         <th>地址</th>
                         <th>电话号码</th>
                         <th>描述</th>
+                        <th>创建时间</th>
                         <th>操作</th>
                       
                     </tr>
@@ -69,7 +72,7 @@
                                 <td>${info.address} </td>
                            	    <td>${info.phone} </td>
                                 <td>${info.sdec} </td>
-                        	   
+                        	       <td>${info.createDate} </td>
                         
                              	<td> 
                              	                                    <a class="btn btn-xs btn-success btn-outline" href="${ctx}/supplier/detail?id=${info.id}" ><i class="fa fa-edit"></i> 查看详情</a>

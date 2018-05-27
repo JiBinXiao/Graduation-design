@@ -24,4 +24,6 @@ public interface OrderMapper extends CrudDao<Order>{
 	List<Order> findDelList();
 
 	List<Order> findConfirmList();
+
+	List<Order> findNotList();
 }

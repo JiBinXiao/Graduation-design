@@ -83,7 +83,13 @@
                   	  	   <tr>
                         <td>创建日期</td>
                          <td>   
-                        	${order.createdate}
+                        	${order.createDate}
+                     	 </td>
+                  	  </tr>
+                  	   	  	   <tr>
+                        <td>修改日期</td>
+                         <td>   
+                        	${order.updateDate}
                      	 </td>
                   	  </tr>
                   	  	   <tr>

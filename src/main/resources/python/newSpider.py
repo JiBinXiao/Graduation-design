@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from datetime import datetime
-import re, requests, pymysql, threading, os, traceback
+import re, requests, pymysql, json
+import urllib
 import sys
 
 try:
@@ -39,7 +40,11 @@ def getPageLength(webSiteName, url):
         soup = getSoupObject(url)
         if webSiteName == 'DangDang':
             a = soup('a', {'name': 'bottom-page-turn'})
-            return a[-1].string
+
+            if len(a) == 0:
+                return 2
+            else:
+                return a[-1].string
         elif webSiteName == 'Amazon':
             a = soup('span', {'class': 'pagnDisabled'})
             return a[-1].string
@@ -49,17 +54,33 @@ def getPageLength(webSiteName, url):
 
 
 # 根据关键字爬去当当网 图书信息 并存入数据库
-def dangDangCrwal(keyword, num):
-
+def dangDangCrwal(keyword, num,sortType):
     count = 1
-    length = int(getPageLength('DangDang', 'http://search.dangdang.com/?key={}'.format(keyword)))  # 总页数
+    # sort_default 综合默认降序  sort_sale_amt_desc 按照销量降序
+    # sort_score_desc 按照好评率降序  sort_pubdate_desc按照出版时间降序
+    #  sort_xlowprice_asc按照价格升序  sort_xlowprice_desc 按照价格降序
+
+    switcher = {
+            "综合": "sort_default",
+            "价格降序": "sort_xlowprice_desc",
+            "价格升序": "sort_xlowprice_asc",
+            "销售量": "sort_sale_amt_desc",
+            "好评": "sort_score_descv",
+
+        }
+    sort_type = switcher.get(sortType,"sort_default")
+
+
+    length = int(getPageLength('DangDang', 'http://search.dangdang.com/?key={}&sort_type={}'.format(keyword,sort_type)))  # 总页数
+    print('http://search.dangdang.com/?key={}&sort_type={}'.format(keyword,sort_type))
     # tableName = 'db_{}_dangdang'.format(self.keyword)
     tableName = 'db_dangdang'
     try:
         # cursor.execute('create table {} (id int ,title text,prNow text,prPre text,author text,publish text,desc1 text,isbn text,link text,type text)'.format(tableName))
-        print('\n提示,开始爬取当当网页面...')
+        print('\n提示：开始爬取当当网页面...')
         for i in range(1, int(length)):
-            url = 'http://search.dangdang.com/?key={}&page_index={}'.format(keyword, i)
+            url = 'http://search.dangdang.com/?key={}&page_index={}&sort_type={}'.format(keyword, i, sort_type )
+
             soup = getSoupObject(url)
             lis = soup('li', {'class': re.compile(r'line'), 'id': re.compile(r'p')})
             for li in lis:
@@ -75,6 +96,9 @@ def dangDangCrwal(keyword, num):
                 pb = li.find_all('a', {'name': 'P_cbs', 'dd_name': '单品出版社'})
                 # 描述
                 dc = li.find_all('p', {'class': 'detail'})
+
+                #评论数
+                review_count = li.find('a', {'name': 'itemlist-review' ,'dd_name' : '单品评论'})
 
                 if not len(a) == 0:
                     link = a[0].attrs['href']
@@ -113,7 +137,12 @@ def dangDangCrwal(keyword, num):
                 else:
                     desc = 'NULL'
 
-                sql = "insert into {} (title,prNow,prPre,author,publish,desc1,isbn,link,type,createdate) values ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(
+                if not len(review_count) == 0:
+                    review_count = review_count.get_text()
+                else:
+                    review_count = 'NULL'
+
+                sql = "insert into {} (title,prNow,prPre,author,publish,desc1,isbn,review_count,link,type,createDate,sortType) values ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(
                     tableName,
                     title,
                     prNow,
@@ -122,10 +151,11 @@ def dangDangCrwal(keyword, num):
                     publish,
                     desc,
                     isbn,
-                    link, keyword, datetime.now())
-               
+                    review_count,
+                    link, keyword, datetime.now(),sortType)
+                #print(sql)
                 cursor.execute(sql)
-              
+
                 count += 1
 
                 conn.commit()
@@ -133,68 +163,33 @@ def dangDangCrwal(keyword, num):
                     break
             if count == num:
                 break
-		print(count)
+        print(count)
     except:
         print(count)
 
 
-class AmazonThread(threading.Thread):
-    def __init__(self, keyword):
-        threading.Thread.__init__(self)
-        self.keyword = keyword
-
-    def run(self):
-        print('\n提示：开始爬取亚马逊数据...')
-        count = 0
-        length = getPageLength('Amazon', 'https://www.amazon.cn/s/keywords={}'.format(self.keyword))  # 总页数
-        tableName = 'db_{}_amazon'.format(self.keyword)
-
-        try:
-            print('\n提示：正在创建Amazon表...')
-            cursor.execute('create table {} (id int ,title text,prNow text,link text)'.format(tableName))
-
-            print('\n提示：开始爬取亚马逊页面...')
-            for i in range(1, int(length)):
-                url = 'https://www.amazon.cn/s/keywords={}&page={}'.format(self.keyword, i)
-                soup = getSoupObject(url)
-                lis = soup('li', {'id': re.compile(r'result_')})
-                for li in lis:
-                    a = li.find_all('a', {'class': 'a-link-normal s-access-detail-page a-text-normal'})
-                    pn = li.find_all('span', {'class': 'a-size-base a-color-price s-price a-text-bold'})
-                    if not len(a) == 0:
-                        link = a[0].attrs['href']
-                        title = a[0].attrs['title'].strip()
-                    else:
-                        link = 'NULL'
-                        title = 'NULL'
-
-                    if not len(pn) == 0:
-                        prNow = pn[0].string
-                    else:
-                        prNow = 'NULL'
-
-                    sql = "insert into {} (id,title,prNow,link) values ({},'{}','{}','{}')".format(tableName, count,
-                                                                                                   title, prNow, link)
-                    cursor.execute(sql)
-                    print('\r提示：正在存入亚马逊数据,当前处理id：{}'.format(count), end='')
-                    count += 1
-
-                    conn.commit()
-        except:
-            pass
-
-
 # 根据关键字爬去京东的图书信息
-def JDCrwal(keyword,num):
+def JDCrwal(keyword, num ,sortType):
     count = 0
     try:
+        # 0:综合 1:价格降序 2:价格升序 3:销量降序 4:评论数降序 5：评论数升序 6：出版时间降序
+        switcher = {
+            "综合": 0,
+            "价格降序": 1,
+            "价格升序": 2,
+            "销售量": 3,
+            "好评": 4,
 
+        }
+        psort = switcher.get(sortType, "0")
         tableName = 'db_jingdong'
         # print('\n提示：正在创建JD表...')
         # cursor.execute('create table {} (id int,title text,prNow text,pb text,isbn text,link text)'.format(tableName))
-        print('\n提示,开始爬取京东页面...')
+        print('\n提示：开始爬取京东页面...')
         for i in range(1, 20):
-            url = 'https://search.jd.com/Search?keyword={}&page={}'.format(keyword, i)
+
+            url = 'https://search.jd.com/Search?keyword={}&page={}&psort={}&enc=utf-8'.format(keyword, i , psort)
+            print(url)
             soup = getSoupObject(url)
             lis = soup('li', {'class': 'gl-item'})
             for li in lis:
@@ -210,7 +205,7 @@ def JDCrwal(keyword,num):
                     link = 'NULL'
                     title = 'NULL'
 
-                if len( link ) > 128 :
+                if len(link) > 128:
                     link = 'TooLong'
 
                 if not len(pn) == 0:
@@ -220,31 +215,84 @@ def JDCrwal(keyword,num):
                 # 进入链接 爬取更多详情
                 soup_link = getSoupObject(link)
                 detail_all = soup_link('ul', {'id': 'parameter2'})
+
                 # 出版社 有广告 判断过滤一下
                 if not len(detail_all) == 0:
                     pb = detail_all[0].find_all('li')[0].get_text().split("：")[1].strip()
                     # ISBN号
                     isbn = detail_all[0].find_all('li')[1].get_text().split("：")[1].strip()
-
+                    # 商品编号
+                    productId = detail_all[0].find_all('li')[3].get_text().split("：")[1].strip()
                 else:
                     pb = 'NULL'
                     isbn = 'NULL'
 
-                sql = "insert into {} (title,prNow,publish,isbn,link,createdate,type) " \
-                      "values ('{}','{}','{}','{}','{}','{}','{}')".format(tableName, title, prNow, pb, isbn,
-                                                                           link, datetime.now(), keyword)
+                goodRateShow, goodCountStr=crwalJDcomment(productId)
 
+                sql = "insert into {} (title,prNow,publish,isbn,link,goodRateShow,goodCountStr,createDate,type,sortType) " \
+                  "values ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(tableName, title, prNow, pb, isbn,
+                                                                       link ,goodRateShow,goodCountStr, datetime.now(), keyword,sortType)
+
+                print(sql)
                 cursor.execute(sql)
-               
+
                 count += 1
                 conn.commit()
                 if num == count:
                     break
             if num == count:
                 break
-		print(count)
+
+        print(count)
     except:
         print(count)
+
+# 爬去京东的好评率 好评数 以及所有评论
+def crwalJDcomment(productId):
+    s = requests.session()
+
+    url = 'https://sclub.jd.com/comment/productPageComments.action'
+    data = {
+        #'callback' : 'fetchJSON_comment98vv849',
+        'productId' : productId,
+        'score' : 0,
+        'sortType': 5,
+        'pageSize': 10,
+        'isShadowSku': 0,
+        'page': 0
+    }
+
+    flag = True
+
+    while flag:
+        t = s.get(url, params = data).text
+        '''
+        try:
+
+            t = re.search(r'(?<=fetchJSON_comment98vv849\().*(?=\);)',t).group(0)
+
+        except Exception as e:
+            break
+        '''
+        j = json.loads(t)
+        commentSummary = j['comments']
+        productCommentSummary= j['productCommentSummary']
+
+        # 好评率
+        goodRateShow = productCommentSummary['goodRateShow']
+        # 评论数
+        goodCountStr = productCommentSummary['goodCountStr']
+        #print(goodRateShow,goodCountStr)
+        # 取出各个评论
+        flag = False
+        for comment in commentSummary:
+            c_content = comment['content']
+            c_time = comment['referenceTime']
+            c_name = comment['nickname']
+            c_client = comment['userClientShow']
+            #print('{} {} {}\n{}\n'.format(c_name, c_time, c_client, c_content))
+        data['page'] += 1
+    return goodRateShow, goodCountStr
 
 
 def closeDB():
@@ -253,16 +301,19 @@ def closeDB():
     cursor.close()
 
 
-def testcrwal(type, keyword, num):
-
+def testcrwal(type, keyword,sortType, num):
+    print(type,keyword,sortType,num)
+    c=int(num)
     if type == 'jingdong':
-        jdThread = JDCrwal(keyword,num)
+        print('go jingdong')
+        JDCrwal(keyword, c, sortType)
 
     if type == 'dangdang':
-        dangDangCrwal(keyword,num)
+        print('go dangdang')
+        dangDangCrwal(keyword,c, sortType)
     closeDB()
+    # os.system('pause')
 
-    #os.system('pause')
 
-testcrwal(sys.argv[1], sys.argv[2],sys.argv[3])
-#testcrwal("jingdong", "python",10)
+testcrwal(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+#testcrwal("jingdong", "[美] Al Sweigart 斯维加特",'好评',"3")

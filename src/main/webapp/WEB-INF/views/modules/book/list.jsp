@@ -65,27 +65,27 @@
                         </c:forEach>
                          <tr>
                                 <td><a href="${ctx}/book/dangdang?type=python"> python</a></td>
-                                <td><a href="${ctx}/book/dangdang?type=python">python </a></td>
+                                <td><a href="${ctx}/book/dangdang?type=[美] Al Sweigart 斯维加特">[美] Al Sweigart 斯维加特 </a></td>
 
                          </tr>
                          <tr>
                                <td> <a href="${ctx}/book/dangdang?type=java"> java</a></td>
-                               <td>爬虫 </td>
+                               <td><a href="${ctx}/book/dangdang?type=杨冠宝">杨冠宝</a> </td>
 
                         </tr>
                             <tr>
                                 <td><a href="${ctx}/book/dangdang?type=c"> c</a></td>
-                                <td>英语 </td>
+                                <td><a href="${ctx}/book/dangdang?type=王江涛">王江涛</a></td>
 
                          </tr>
                              <tr>
                                 <td><a href="${ctx}/book/dangdang?type=javascript"> javascript</a></td>
-                                <td>c </td>
+                                <td><a href="${ctx}/book/dangdang?type=王志钢">王志钢</a> </td>
 
                          </tr>
                              <tr>
                                 <td><a href="${ctx}/book/dangdang?type=高数"> 高数</a></td>
-                                <td>信息系统分析 </td>
+                                <td><a href="${ctx}/book/dangdang?type=肖秀荣">肖秀荣</a> </td>
 
                          </tr>
                              <tr>

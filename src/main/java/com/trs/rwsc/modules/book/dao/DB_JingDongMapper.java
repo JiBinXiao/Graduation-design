@@ -12,7 +12,7 @@ public interface DB_JingDongMapper extends CrudDao<DB_JingDong>{
     int insertSelective(DB_JingDong db_JingDong);
 
 
-	void deleteByType(String type);
+	void deleteByType(String type,String sortType);
 
   
 }

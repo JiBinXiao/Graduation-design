@@ -27,11 +27,19 @@ public class DB_DangDang extends DataEntity<DB_DangDang>{
 
     private String type;
 
-    private Date createdate;
+    private String sortType;
 
 
 
-    public String getTitle() {
+    public String getSortType() {
+		return sortType;
+	}
+
+	public void setSortType(String sortType) {
+		this.sortType = sortType;
+	}
+
+	public String getTitle() {
         return title;
     }
 
@@ -113,11 +121,7 @@ public class DB_DangDang extends DataEntity<DB_DangDang>{
         this.type = type == null ? null : type.trim();
     }
 
-    public Date getCreatedate() {
-        return createdate;
-    }
 
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
-    }
+
+    
 }

@@ -1,5 +1,6 @@
 package com.trs.rwsc.modules.order.entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import com.trs.rwsc.common.persistence.DataEntity;
@@ -19,7 +20,7 @@ public class Order extends DataEntity<Order>{
 
     private Integer st;
 
-    private Date createdate;
+
 
     private String receivingUnit;
 
@@ -82,15 +83,9 @@ public class Order extends DataEntity<Order>{
         this.st = st;
     }
 
-    public Date getCreatedate() {
-        return createdate;
-    }
 
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
-    }
 
-    public String getReceivingUnit() {
+	public String getReceivingUnit() {
         return receivingUnit;
     }
 
@@ -133,6 +128,7 @@ public class Order extends DataEntity<Order>{
 	public void setSupplierId(String supplierId) {
 		this.supplierId = supplierId;
 	}
+
 
 	
     

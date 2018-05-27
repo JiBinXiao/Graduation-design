@@ -40,6 +40,16 @@ public class OrderService extends CrudService<OrderMapper, Order>{
 		page.setList(dao.findConfirmList());
 		return page;
 	}
+
+	//查询为收货
+	public Page<Order> findNotList(Page<Order> page, Order order) {
+		// TODO Auto-generated method stub
+		order.setPage(page);
+		page.setList(dao.findNotList());
+		return page;
+	}
+
+
 	
 
 

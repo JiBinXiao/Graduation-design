@@ -36,13 +36,21 @@ public class BookController extends BaseController {
     @RequestMapping(value = "dangdang")
     public String dangDanglist(DB_DangDang db_DangDang, HttpServletRequest request, HttpServletResponse response, Model model) {
     	String type=request.getParameter("type");
+    	String sortType=request.getParameter("sortType");
+    	if(sortType!=null && !"".equals(sortType))
+    		db_DangDang.setSortType(sortType);
+    	else {
+    		sortType="综合";
+    		db_DangDang.setSortType(sortType);
+    	}
+    		
     	db_DangDang.setType(type);
-    	
+
         Page<DB_DangDang> page = db_DangDangService.findPage(new Page<DB_DangDang>(request, response), db_DangDang);
 
         model.addAttribute("page", page);
         model.addAttribute("type", type);
-        
+        model.addAttribute("sortType", sortType);
         return "modules/book/dangdanglist";
     }
     
@@ -51,10 +59,19 @@ public class BookController extends BaseController {
     @RequestMapping(value = "jingdong")
     public String jingDonglist(DB_JingDong db_JingDong, HttpServletRequest request, HttpServletResponse response, Model model) {
     	String type=request.getParameter("type");
+    	String sortType=request.getParameter("sortType");
     	db_JingDong.setType(type);
+    	if(sortType!=null && !"".equals(sortType))
+    		db_JingDong.setSortType(sortType);
+    	else {
+    		sortType="综合";
+    		db_JingDong.setSortType(sortType);
+    	}
+    		
         Page<DB_JingDong> page = dB_JingDongService.findPage(new Page<DB_JingDong>(request, response), db_JingDong);
 
         model.addAttribute("page", page);
+        model.addAttribute("sortType", sortType);
         model.addAttribute("type", type);
         return "modules/book/jingdonglist";
     }
@@ -80,13 +97,14 @@ public class BookController extends BaseController {
     	String type=request.getParameter("type");
     	String keyword=request.getParameter("keyword");
     	String sum=request.getParameter("sum");
+    	String sortType=request.getParameter("sortType");
     	if("jingdong".equals(type)) {
-    		int res=dB_JingDongService.deleteByType(keyword);
+    		int res=dB_JingDongService.deleteByType(keyword,sortType);
 
     	}
     	
     	if("dangdang".equals(type)) {
-    		int res=db_DangDangService.deleteByType(keyword);
+    		int res=db_DangDangService.deleteByType(keyword,sortType);
     		
     	}
     	String pythonpath=request.getSession().getServletContext().getRealPath("static\\python");
@@ -94,10 +112,12 @@ public class BookController extends BaseController {
 		if(sum==null)
 			sum="21";
 			
-		int re=crwalUtil.crwal(type, keyword,pythonpath,Integer.parseInt(sum));
+		int re=crwalUtil.crwal(type, keyword,sortType,pythonpath,Integer.parseInt(sum));
 		
 		
     	String msg="成功爬取出"+(re-1)+"条数据";
+    	if( re==-1)
+    		msg="无法爬取";
     	return RtnResult.successInfo(msg, null);
     }
     

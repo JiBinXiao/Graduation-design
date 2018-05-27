@@ -10,12 +10,13 @@
     <result column="link" property="link" jdbcType="LONGVARCHAR" />
     <result column="goodRateShow" property="goodRateShow" jdbcType="LONGVARCHAR" />
     <result column="goodCountStr" property="goodCountStr" jdbcType="LONGVARCHAR" />
-    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
     <result column="type" property="type" jdbcType="VARCHAR" />
+     <result column="sortType" property="sortType" jdbcType="VARCHAR" />
   </resultMap>
 
   <sql id="Base_Column_List" >
-    id,title,prNow,publish,isbn,link,goodRateShow,goodCountStr,createdate, type
+    id,title,prNow,publish,isbn,link,goodRateShow,goodCountStr,createDate, type,sortType
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -25,8 +26,8 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   
-   <delete id="deleteByType"   parameterType="string" >	
-    	delete from db_jingdong where type = #{type}
+   <delete id="deleteByType"   >	
+    	delete from db_jingdong where type = #{0} and sortType=#{1}
     </delete>
   
   
@@ -39,7 +40,7 @@
 	<select id="findList" parameterType="com.trs.rwsc.modules.book.entity.DB_JingDong" resultType="com.trs.rwsc.modules.book.entity.DB_JingDong">
 		SELECT
 			<include refid="Base_Column_List" />
-		FROM db_jingdong where type=#{type}
+		FROM db_jingdong where type=#{type} and sortType=#{sortType}
 	</select>
 	
 	<select id="get" parameterType="int" resultType="com.trs.rwsc.modules.book.entity.DB_JingDong">
@@ -48,13 +49,13 @@
 		FROM db_jingdong where id=#{id}
 	</select>
 	
-	<!-- 查询全部企业数目 -->
+
 	<select id="findAllCount" parameterType="com.trs.rwsc.modules.book.entity.DB_JingDong" resultType="long">
 		SELECT
 			COUNT(1)
 		FROM db_jingdong
 		<if test="type != null" >
-        where type=#{type}
+        where type=#{type} and sortType=#{sortType}
       </if>
 		
 	</select>

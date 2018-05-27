@@ -29,9 +29,9 @@ public class DB_DangDangService extends CrudService<DB_DangDangMapper, DB_DangDa
 
 
 		@Transactional( readOnly = false)
-		public int deleteByType(String type) {
+		public int deleteByType(String type,String sortType) {
 			// TODO Auto-generated method stub
-			db_DangDangMapper.deleteByType(type);
+			db_DangDangMapper.deleteByType(type,sortType);
 			return 0;
 		}
 }

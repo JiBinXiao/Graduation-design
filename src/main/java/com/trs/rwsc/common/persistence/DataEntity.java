@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Length;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -24,9 +25,9 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	
 	protected String remark;	// 备注
 	protected User createBy;	// 创建者
-	protected Date createDate;	// 创建日期
+	protected java.sql.Timestamp createDate;	// 创建日期
 	protected User updateBy;	// 更新者
-	protected Date updateDate;	// 更新日期
+	protected java.sql.Timestamp updateDate;	// 更新日期
 	protected int delflag; 	// 删除标记（1：正常；-1：删除）
 	
 	public DataEntity() {
@@ -53,7 +54,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 			this.updateBy = user;
 			this.createBy = user;
 		}
-		this.updateDate = new Date();
+		this.updateDate = new Timestamp(System.currentTimeMillis()); 
 		this.createDate = this.updateDate;
 	}
 	
@@ -66,7 +67,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 		if (user.getId() != 0){
 			this.updateBy = user;	
 		}
-		this.updateDate = new Date();
+		this.updateDate =new  Timestamp(System.currentTimeMillis()); 
 	}
 	
 	@Length(min=0, max=255)
@@ -92,10 +93,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
+	
 	@JsonIgnore
 	public User getUpdateBy() {
 		return updateBy;
@@ -110,11 +108,17 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 		return updateDate;
 	}
 
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
+	
+
+
+
+	public void setCreateDate(java.sql.Timestamp createDate) {
+		this.createDate = createDate;
 	}
 
-
+	public void setUpdateDate(java.sql.Timestamp updateDate) {
+		this.updateDate = updateDate;
+	}
 
 	@JsonIgnore
 	@Length(min=1, max=1)

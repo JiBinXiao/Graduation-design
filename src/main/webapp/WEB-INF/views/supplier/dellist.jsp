@@ -31,15 +31,13 @@
                 <form id="searchForm" action="${ctx}/supplier/search" method="post" class="form-inline m-t-sm">
                     <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
                     <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
-                    <div class="form-group">
-                        <label  class="control-label">供应商名称:</label>
-                        <input type="text" placeholder="请输入供应商名称" name="modelname" value="${supplier.sname}" class="form-control">
-                    </div>
+                   
                   
 
-                    <a href="#" class="btn btn-success btn-sm m-l-md pull-right" id="search"><i class="fa fa-search"></i> 查询</a>
-                	<a href="${ctx}/supplier/list" class="btn btn-success btn-sm m-l-md pull-right" id="search"><i class="fa fa-search"></i> 返回</a>
+                  
                 </form>
+
+                	<a href="${ctx}/supplier/list" class="btn btn-success btn-sm m-l-md pull-right" id="search"><i class="fa fa-search"></i> 返回</a>
             </blockquote>
         </div>
         <div class="col-xs-12">

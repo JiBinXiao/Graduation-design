@@ -31,14 +31,11 @@
                 <form id="searchForm" action="${ctx}/supplier/list" method="post" class="form-inline m-t-sm">
                     <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
                     <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
-                    <div class="form-group">
-                        <label  class="control-label">订单编号:</label>
-                        <input type="text" placeholder="请输入订单编号" name="id" value="${orders.id}" class="form-control">
-                    </div>
-                    <a id="resetBtn" class="btn btn-sm  btn-success btn-outline m-l-sm pull-right"><i class="fa fa-refresh"></i> 重置</a>
-                    <a href="#" class="btn btn-success btn-sm m-l-md pull-right" id="search"><i class="fa fa-search"></i> 查询</a>
-                     <a href="${ctx}/orders/list" class="btn btn-success btn-sm m-l-md pull-right" id="search"><i class="fa fa-search"></i> 返回</a>
+              
+                    
                 </form>
+          
+                     <a href="${ctx}/orders/list" class="btn btn-success btn-sm m-l-md pull-right" id="search"><i class="fa fa-search"></i> 返回</a>
             </blockquote>
         </div>
        
@@ -52,9 +49,11 @@
                         <th>数量</th>
                         <th>总金额</th>
                         <th>收货人</th>
-                        <th>创建时间</th>
+                      
                          <th>来源</th>
                           <th>状态</th>
+                           <th>创建时间</th>
+                              <th>收货时间</th>
                           <th>操作</th>
                     </tr>
                     </thead>
@@ -69,9 +68,12 @@
                                  <td>${info.num} </td>
                                 <td>${info.price} </td>
                                 <td>${info.receivingPerson}</td>
-                                <td>${info.createdate}</td>
+                               
                                  <td>${info.origin}</td>
-                                 <td>已收货</td>
+                                  <td>已收货</td>	
+                                 <td>${info.createDate}</td>
+                                    <td>${info.updateDate}</td>
+                                
                                 <td>
                                     <a class="btn btn-xs btn-success btn-outline" href="${ctx}/orders/detail?id=${info.id}" ><i class="fa fa-edit"></i> 查看详情</a>
                         

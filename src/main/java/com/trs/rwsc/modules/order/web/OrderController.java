@@ -1,6 +1,7 @@
 package com.trs.rwsc.modules.order.web;
 
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +25,8 @@ import com.trs.rwsc.modules.order.service.OrderService;
 import com.trs.rwsc.modules.supplier.entity.Supplier;
 import com.trs.rwsc.modules.supplier.service.SupplierService;
 
+import net.sf.ehcache.search.expression.Or;
+
 @Controller
 @RequestMapping(value = "${adminPath}/orders/")
 public class OrderController {
@@ -44,11 +47,13 @@ public class OrderController {
 			String supplierid = request.getParameter("supplierid");
 			String bookId=request.getParameter("bookId");
 		
-			order.setCreatedate(new Date());
+			
 			order.setPrice(order.getNum()*order.getPrice());
 			order.setSt(1);
 			order.setSupplierId(supplierid);
 			order.setBookId(bookId);
+			order.setIsNewRecord(true);
+			order.preInsert();
 		    int ret=orderService.add(order);
 	  
 	    	String msg="保存失败";
@@ -70,9 +75,10 @@ public class OrderController {
 	@RequestMapping(value = "list")
     public String list(Order order,HttpServletRequest request, HttpServletResponse response, Model model) {
 
+		String searchID=request.getParameter("searchID");
+
 		
-		
-        Page<Order> page = orderService.findPage(new Page<Order>(request, response), order);
+        Page<Order> page = orderService.findNotList(new Page<Order>(request, response), order);
 
 
         model.addAttribute("page", page);
@@ -94,7 +100,7 @@ public class OrderController {
 		order=orderService.get(order.getId());
 		Supplier supplier=supplierService.get(Integer.parseInt(order.getSupplierId()));
 		model.addAttribute("order", order);
-		System.out.println(order.getCreatedate());
+		
 		model.addAttribute("supplier",supplier);
         return "modules/order/detail";
     }
@@ -152,6 +158,7 @@ public class OrderController {
 	@RequestMapping(value = "delete")
 	public String delete(Order order,HttpServletRequest request, HttpServletResponse response, Model model) {
 		order.setSt(-1);
+		order.preUpdate();
 		int t=orderService.update(order);
 		
 	    Page<Order> page = orderService.findPage(new Page<Order>(request, response), order);
@@ -172,10 +179,14 @@ public class OrderController {
 	@RequestMapping(value = "confirm")
 	public String confirm(Order order,HttpServletRequest request, HttpServletResponse response, Model model) {
 		order.setSt(2);
+		order.preUpdate();
 		int t=orderService.update(order);
 		
 	    Page<Order> page = orderService.findPage(new Page<Order>(request, response), order);
-
+	    List<Order> lsits= page.getList();
+	    for (Order order2 : lsits) {
+			System.out.println(order2);
+		}
         model.addAttribute("page", page);
         
         return "modules/order/list";
@@ -192,6 +203,7 @@ public class OrderController {
 	@RequestMapping(value = "recover")
 	public String recover(Order order,HttpServletRequest request, HttpServletResponse response, Model model) {
 		order.setSt(1);
+		order.preUpdate();
 		int t=orderService.update(order);
 		
 	    Page<Order> page = orderService.findPage(new Page<Order>(request, response), order);

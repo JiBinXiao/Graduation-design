@@ -17,9 +17,9 @@ public class DB_JingDongService extends CrudService<DB_JingDongMapper, DB_JingDo
 	@Autowired
 	private DB_JingDongMapper db_JingDongMapper;
 	@Transactional(readOnly = false)
-	public int deleteByType(String type) {
+	public int deleteByType(String type,String sortType) {
 		// TODO Auto-generated method stub
-		db_JingDongMapper.deleteByType(type);
+		db_JingDongMapper.deleteByType(type, sortType);
 		return 0;
 	}
 

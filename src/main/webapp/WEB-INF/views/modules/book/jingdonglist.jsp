@@ -27,17 +27,33 @@
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-xs-12">
-            <blockquote class="text-primary gray-bg-high"><i class="fa fa-codepen text-primary"></i>采购列表——京东（${type}）
+            <blockquote class="text-primary gray-bg-high"><i class="fa fa-codepen text-primary"></i>采购列表——京东（${type}）（${sortType}）
                 <form id="searchForm" action="${ctx}/book/jingdong" method="post" class="form-inline m-t-sm">
                     <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
                     <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
                     <input  name="type" type="hidden" value="${type}"/>
                     <div class="form-group">
-                        <label  class="control-label">书籍名称:</label>
-                        <input type="text" placeholder="请输入书籍名称" name="modelname" value="${modelinfo.modelname}" class="form-control">
+                        <label  class="control-label">排序方式:</label>
+                           <select class="form-control" name = 'sortType'  id='sortType'>
+									 <option  value='综合' <c:if test="${sortType eq '综合'}">selected="selected"</c:if> >综合</option>		
+									 <option  value='好评'  <c:if test="${sortType eq '好评'}">selected="selected"</c:if>>好评</option>		
+									 <option  value='销售量'  <c:if test="${sortType eq '销售量'}">selected="selected"</c:if>>销售量</option>		
+									 <option  value='价格升序'  <c:if test="${sortType eq '价格升序'}">selected="selected"</c:if>>价格升序</option>		
+									 <option  value='价格降序'  <c:if test="${sortType eq '价格降序'}">selected="selected"</c:if>>价格降序</option>			       
+						 </select>
                     </div>
-                  <a class="btn btn-sm btn-warning  m-l-sm pull-right" href="javascript:void(0)" onclick="onCrawl('${type}')"><i class="fa fa-plus"></i> 爬取</a>
-                    <a class="btn btn-sm btn-warning  m-l-sm pull-right" href="${ctx}/book/dangdang?type=${type}"><i class="fa fa-plus"></i> 当当</a>
+                       <c:choose>
+                       	<c:when test="${sortType eq '综合' }">  <a class="btn btn-sm btn-warning  m-l-sm pull-right" href="javascript:void(0)" onclick="onCrawl('${type}','综合')"><i class="fa fa-plus"></i> 按综合排序爬取</a></c:when>
+                       	<c:when test="${sortType eq '好评' }">   <a class="btn btn-sm btn-warning  m-l-sm pull-right" href="javascript:void(0)" onclick="onCrawl('${type}','好评')"><i class="fa fa-plus"></i> 按好评排序爬取</a></c:when>
+                       	<c:when test="${sortType eq '销售量' }"> <a class="btn btn-sm btn-warning  m-l-sm pull-right" href="javascript:void(0)" onclick="onCrawl('${type}','销售量')"><i class="fa fa-plus"></i> 按销售量降序排序爬取</a></c:when>
+                       	<c:when test="${sortType eq '价格升序' }"> <a class="btn btn-sm btn-warning  m-l-sm pull-right" href="javascript:void(0)" onclick="onCrawl('${type}','价格升序')"><i class="fa fa-plus"></i> 按价格升序排序爬取</a></c:when>
+                       	<c:when test="${sortType eq '价格降序' }"> <a class="btn btn-sm btn-warning  m-l-sm pull-right" href="javascript:void(0)" onclick="onCrawl('${type}','价格降序')"><i class="fa fa-plus"></i> 按价格降序排序爬取</a></c:when>
+                       </c:choose>
+					   <div class="form-group">
+                       <input class="btn btn-sm btn-warning  m-l-sm pull-right" type="submit" value="查询"  /> 
+                         
+                    </div>
+                    <a class="btn btn-sm  btn-success btn-outline m-l-sm pull-right" href="${ctx}/book/dangdang?type=${type}"><i class="fa fa-plus"></i> 当当</a>
 
                   
                 </form>
@@ -58,6 +74,7 @@
                          <th>ISBN号</th>
                          <th>好评率</th>
                          <th>评论数</th>
+                         <th>爬取时间</th>
                          <th>操作</th>
                     </tr>
                     </thead>
@@ -76,7 +93,7 @@
                              	<td>${info.isbn} </td>
                          	    <td>${info.goodRateShow}% </td>
                          	    <td>${info.goodCountStr} </td>
-                             	
+                             	<td>${info.createDate} </td>
                         
                              	<td>   <a class="btn btn-xs btn-success btn-outline" href="${ctx}/books/add?origin=jingdong&id=${info.id}"  ><i class="fa fa-edit"></i> 采购</a></td>
                             </tr>
@@ -127,20 +144,20 @@
 
     
     //运算
-    function onCrawl(type) {
+    function onCrawl(type,sortType) {
     	
         top.$.jBox.confirm("确定爬取吗？","系统提示",function(v, h,f) {
             if (v == "ok"){
                 $.ajax({
                     url: "${ctx}/book/crwal",
                     type: "post",
-                    data: {"keyword":type,"type":"jingdong"},
+                    data: {"keyword":type,"type":"jingdong","sortType":sortType},
                     dataType:"json",
                     success:function(data){
                         if(data.success){
                             
                             top.$.jBox.success(data.msg,'系统提示',{ closed: function () {
-                                location.href = "${ctx}/book/jingdong?type="+type;
+                                location.href = "${ctx}/book/jingdong?type="+type+"&sortType="+sortType;
                             }
                             });
                             
@@ -156,7 +173,7 @@
                 });
             }
         })
-    }
+    };
     
     
 
@@ -166,7 +183,7 @@
                 window.open("${ctx}/modelinfo/getFile?id="+id, '_blank');
             }
         })
-    }
+    };
     //分页
     function page(n,s){
         if(n) $("#pageNo").val(n);
