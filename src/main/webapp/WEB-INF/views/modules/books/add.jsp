@@ -18,6 +18,7 @@
     <!-- WIZARD（向导）-->
     <link rel="stylesheet" type="text/css" href="${ctxStatic}/css/plugins/wizard/wizard.css" />
     <link type="text/css" rel="stylesheet" href="${ctxStatic}/js/jquery-jbox/2.3/Skins/Blue/jbox.css?v=0232"/>
+    
     <!--[if lt IE 9]>
     <script src="${ctxStatic}/js/html5shiv.js"></script>
     <script src="${ctxStatic}/js/respond.min.js"></script>

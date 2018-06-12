@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="renderer" content="webkit">
-    <title>采购管理</title>
+    <title>采购推荐管理</title>
     <link rel="stylesheet" href="${ctxStatic}/css/bootstrap.min.css" title="" />
     <link rel="stylesheet" type="text/css" href="${ctxStatic}/css/plugins/datapicker/bootstrap-datetimepicker.css" />
     <!--<link rel="stylesheet" type="text/css" href="css/animate.css" />-->
@@ -27,7 +27,7 @@
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-xs-12">
-            <blockquote class="text-primary gray-bg-high"><i class="fa fa-codepen text-primary"></i>采购列表——京东（${type}）（${sortType}）
+            <blockquote class="text-primary gray-bg-high"><i class="fa fa-codepen text-primary"></i>采购推荐列表——京东（${type}）（${sortType}）
                 <form id="searchForm" action="${ctx}/book/jingdong" method="post" class="form-inline m-t-sm">
                     <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
                     <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>

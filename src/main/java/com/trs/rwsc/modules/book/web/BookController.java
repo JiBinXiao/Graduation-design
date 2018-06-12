@@ -110,7 +110,7 @@ public class BookController extends BaseController {
     	String pythonpath=request.getSession().getServletContext().getRealPath("static\\python");
 		CrwalUtil crwalUtil=new CrwalUtil();
 		if(sum==null)
-			sum="21";
+			sum="11";
 			
 		int re=crwalUtil.crwal(type, keyword,sortType,pythonpath,Integer.parseInt(sum));
 		

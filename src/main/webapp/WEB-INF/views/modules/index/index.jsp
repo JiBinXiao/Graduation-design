@@ -43,8 +43,8 @@
 			<div class="sBox">
 				<div class="subNav subNav_no  active">
 					<a href="${ctx}/book/list" target="right" class="J_menuItem J_tabShowActive">
-						<i class="fa fa-empire" title="采购管理"></i>
-						<span class="sublist-title">采购管理</span><span class="glyphicon glyphicon-chevron-up" style="display: none;"></span>
+						<i class="fa fa-empire" title="采购推荐管理"></i>
+						<span class="sublist-title">采购推荐管理</span><span class="glyphicon glyphicon-chevron-up" style="display: none;"></span>
 					</a>
 				</div>
 			</div>
